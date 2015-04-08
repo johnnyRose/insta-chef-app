@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="#ff607d8b">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="340dp"
+        android:layout_height="12dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="#ffb6b6b6"
+        android:id="@+id/linearLayout"></LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:layout_below="@+id/linearLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Export Recipe:"
+            android:id="@+id/export_header_textview"
+            android:textColor="#ff212121"
+            android:textSize="25dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="15dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose a recipe to export..."
+            android:id="@+id/export_button"
+            android:textColor="#ff212121"
+            android:width="280dp"
+            android:background="#ff455a64"
+            android:layout_below="@+id/export_header_textview"
+            android:layout_alignLeft="@+id/export_header_textview"
+            android:layout_alignStart="@+id/export_header_textview" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/export_progressBar"
+            android:layout_marginTop="37dp"
+            android:indeterminate="true"
+            android:layout_below="@+id/export_button"
+            android:layout_alignLeft="@+id/export_button"
+            android:layout_alignStart="@+id/export_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="export status text goes here"
+            android:id="@+id/export_status_textview"
+            android:textColor="#ff212121"
+            android:layout_alignBottom="@+id/export_progressBar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="300dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/linearLayout" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Import Recipe:"
+            android:id="@+id/import_header_textview"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_margin="15dp"
+            android:textColor="#ff212121"
+            android:textSize="25dp"
+            android:textStyle="bold" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Choose a file to import..."
+            android:id="@+id/import_button"
+            android:layout_below="@+id/import_header_textview"
+            android:layout_alignLeft="@+id/import_header_textview"
+            android:layout_alignStart="@+id/import_header_textview"
+            android:textColor="#ff212121"
+            android:width="280dp"
+            android:background="#ff455a64" />
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/import_progress_bar"
+            android:layout_below="@+id/import_button"
+            android:layout_alignLeft="@+id/import_button"
+            android:layout_alignStart="@+id/import_button"
+            android:layout_marginTop="38dp"
+            android:indeterminate="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="import status text goes here"
+            android:id="@+id/import_status_textview"
+            android:layout_alignBottom="@+id/import_progress_bar"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:textColor="#ff212121"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp" />
+    </RelativeLayout>
+</RelativeLayout>
