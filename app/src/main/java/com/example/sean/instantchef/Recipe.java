@@ -1,6 +1,7 @@
 package com.example.sean.instantchef;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -16,12 +17,14 @@ public class Recipe implements Serializable {
     public String createdBy; // author
     public Timer primaryTimer; // main recipe timer
     public boolean isActive; // pause/resume timer execution
+    public ArrayList<Ingredient> ingredients;
 
     public Recipe() {
         this.dateCreated = new Date(); // current date and time
         this.primaryTimer = new Timer();
         this.primaryTimer.setRecipe(this);
         this.isActive = false;
+        this.ingredients = new ArrayList<Ingredient>();
     }
 
     public void start() {
@@ -40,6 +43,14 @@ public class Recipe implements Serializable {
 
     public void removeTimer(Timer parentTimer, Timer targetTimer) {
         parentTimer.timers.remove(targetTimer);
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        this.ingredients.add(ingredient);
+    }
+
+    public void removeIngredient(Ingredient ingredient) {
+        this.ingredients.remove(ingredient);
     }
 
     public String serialize() {
