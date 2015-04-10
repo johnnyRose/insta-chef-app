@@ -1,31 +1,18 @@
 package com.example.sean.instantchef;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
-
-public class MainActivity extends ActionBarActivity {
+public class RecipeListActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-    }
+        setContentView(R.layout.activity_recipe_list);
 
-    public void go_to_import_screen(View view) {
-        Intent intent = new Intent();
-        intent.setClass(MainActivity.this, ImportExportActivity.class);
-        startActivity(intent);
-    }
-
-    public void go_to_recipe_list(View view) {
-        Intent intent = new Intent();
-        intent.setClass(MainActivity.this, RecipeListActivity.class);
-        startActivity(intent);
+        //Intent intent = getIntent();
     }
 
     @Override
