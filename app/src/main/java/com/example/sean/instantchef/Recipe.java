@@ -8,23 +8,33 @@ import java.util.Date;
  * Created by John Rosewicz on 4/8/2015.
  */
 public class Recipe implements Serializable {
+    public static int recipe_index = 0;
 
     public int id; // database integration
     public String description; // description of recipe
     public String imagePath; // path to image on web
     public String name; // recipe name
-    public Date dateCreated; // date created
+    public String dateCreated; // date created
     public String createdBy; // author
     public Timer primaryTimer; // main recipe timer
     public boolean isActive; // pause/resume timer execution
     public ArrayList<Ingredient> ingredients;
 
+    public Recipe(String description, String name, String dateCreated, String createdBy) {
+        this.description = description;
+        this.name = name;
+        this.dateCreated = dateCreated;
+        this.createdBy = createdBy;
+        this.id = recipe_index++;
+    }
+
     public Recipe() {
-        this.dateCreated = new Date(); // current date and time
+        this.dateCreated = new Date().toString(); // current date and time
         this.primaryTimer = new Timer();
         this.primaryTimer.setRecipe(this);
         this.isActive = false;
         this.ingredients = new ArrayList<Ingredient>();
+        this.id = recipe_index++;
     }
 
     public void start() {

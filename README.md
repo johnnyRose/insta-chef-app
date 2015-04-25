@@ -12,4 +12,5 @@ Group project for mobile app development class.
 * Recipe Creation (add, edit, delete)
 * Timers (add, edit, delete)
 * Recipe Storage
+* Recipe import/export
 * Cooking screen

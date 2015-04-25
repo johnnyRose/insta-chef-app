@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Export Recipe:"
+            android:text="Export Recipes:"
             android:id="@+id/export_header_textview"
             android:textColor="#ff212121"
             android:textSize="25dp"
@@ -36,14 +36,15 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Choose a recipe to export..."
+            android:text="Export all recipes..."
             android:id="@+id/export_button"
             android:textColor="#ff212121"
             android:width="280dp"
             android:background="#ff455a64"
             android:layout_below="@+id/export_header_textview"
             android:layout_alignLeft="@+id/export_header_textview"
-            android:layout_alignStart="@+id/export_header_textview" />
+            android:layout_alignStart="@+id/export_header_textview"
+            android:onClick="export_file" />
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -81,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Import Recipe:"
+            android:text="Import Recipes:"
             android:id="@+id/import_header_textview"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
@@ -101,7 +102,9 @@
             android:layout_alignStart="@+id/import_header_textview"
             android:textColor="#ff212121"
             android:width="280dp"
-            android:background="#ff455a64" />
+            android:background="#ff455a64"
+            android:onClick="import_file"
+            android:nestedScrollingEnabled="false" />
 
         <ProgressBar
             android:layout_width="wrap_content"
