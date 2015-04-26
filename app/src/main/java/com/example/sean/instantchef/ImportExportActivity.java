@@ -49,7 +49,7 @@ public class ImportExportActivity extends ActionBarActivity {
         //TODO: implement file chooser, maybe.
         //apparently android API has no built-in support for a file chooser. lame.
 
-        //we'll use a hardcoded string for now to work out the parsing.
+        //we'll use a hardcoded JSON string for now to work out the parsing, see the bottom of this file for the pretty version.
         String json_string = "{\"recipe0\":{\"id\":0,\"description\":\"test recipe\",\"imagePath\":\"/dev/null/\",\"name\":\"Test Recipe\",\"dateCreated\":\"4/10/2015\",\"createdBy\":\"Sean Porter\",\"isActive\":false,\"ingredients\":{\"id\":0,\"description\":\"carrots\"},\"primaryTimer\":{\"id\":0,\"startDescription\":\"add veggies\",\"endDescription\":\"\",\"secondsRemaining\":30,\"startWhenParentTime\":30,\"timers\":{\"id\":1,\"startDescription\":\"raise heat to boil\",\"endDescription\":\"\",\"secondsRemaining\":30,\"startWhenParentTime\":30,\"timers\":{}}}},\"recipe1\":{\"id\":1,\"description\":\"test recipe 2\",\"imagePath\":\"/dev/null/\",\"name\":\"Test Recipe 2\",\"dateCreated\":\"4/10/2015\",\"createdBy\":\"Sean Porter\",\"isActive\":false,\"ingredients\":{\"id\":0,\"description\":\"carrots\"},\"primaryTimer\":{\"id\":0,\"startDescription\":\"add veggies\",\"endDescription\":\"\",\"secondsRemaining\":30,\"startWhenParentTime\":30,\"timers\":{\"id\":1,\"startDescription\":\"raise heat to boil\",\"endDescription\":\"\",\"secondsRemaining\":30,\"startWhenParentTime\":30,\"timers\":{}}}}}";
         JSONObject json_file = new JSONObject(json_string);
 
@@ -58,7 +58,7 @@ public class ImportExportActivity extends ActionBarActivity {
             Recipe recipe = new Recipe(current_recipe.getString("description"), current_recipe.getString("name"),
                     current_recipe.getString("dateCreated"), current_recipe.getString("createdBy"));
             //TODO: add recipe to database here.
-            
+
         }
     }
 

@@ -7,13 +7,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.util.ArrayList;
+
 
 public class MainActivity extends ActionBarActivity {
+    //storing recipes in an arraylist for now, just to simplify the code.
+    //we can tie this into a persistent database fairly easy later on.
+    public static ArrayList<Recipe> recipes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //set up a dummy recipe to make sure the recipe adapter is working.
+        Recipe test = new Recipe("test recipe", "test recipe", "", "sean");
+        test.totalTime = "10 minutes";
+        recipes.add(test);
     }
 
     public void go_to_import_screen(View view) {
