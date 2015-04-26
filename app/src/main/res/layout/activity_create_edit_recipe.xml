@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ff607d8b">
@@ -11,8 +11,205 @@
         android:text="New Recipe"
         android:id="@+id/createRecipeTitleView"
         android:layout_gravity="center_horizontal"
-        android:layout_margin="15dp"
         android:textStyle="bold"
         android:textSize="22sp"
-        android:textColor="#ff212121" />
-</LinearLayout>
+        android:textColor="#ff212121"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="15dp" />
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/createRecipeTitleView">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Recipe name:"
+                android:id="@+id/textView2"
+                android:layout_marginLeft="5dp"
+                android:textColor="#ff212121" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/nameEditText"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="#ff212121" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Recipe description:"
+                android:id="@+id/textView3"
+                android:layout_marginLeft="5dp"
+                android:textColor="#ff212121" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/descriptionEditText"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="#ff212121" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Created by:"
+                android:id="@+id/textView4"
+                android:layout_marginLeft="5dp"
+                android:textColor="#ff212121" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/createdByEditText"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:textColor="#ff212121" />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ingredients:"
+                    android:id="@+id/textView5"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#ff212121" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add ingredient..."
+                    android:id="@+id/addIngredientButton"
+                    android:textColor="#ff212121"
+                    android:background="#ff455a64"
+                    android:layout_margin="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:onClick="add_ingredient" />
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="127dp"
+                android:id="@+id/ingredientListView"
+                android:layout_marginRight="3dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="2dp"
+                android:id="@+id/textView7"
+                android:background="#ff455a64"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Steps:"
+                    android:id="@+id/textView6"
+                    android:layout_marginLeft="5dp"
+                    android:textColor="#ff212121" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add step..."
+                    android:id="@+id/addTimerButton"
+                    android:textColor="#ff212121"
+                    android:background="#ff455a64"
+                    android:layout_margin="5dp"
+                    android:layout_marginLeft="10dp"
+                    android:paddingLeft="6dp"
+                    android:paddingRight="6dp"
+                    android:onClick="add_step" />
+            </LinearLayout>
+
+            <ListView
+                android:layout_width="wrap_content"
+                android:layout_height="128dp"
+                android:id="@+id/timerListView"
+                android:layout_marginRight="3dp" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:text="Save Recipe"
+                android:id="@+id/saveButton"
+                android:textColor="#ff212121"
+                android:background="#ff455a64"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:onClick="save_recipe" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
