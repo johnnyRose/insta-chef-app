@@ -43,6 +43,14 @@ public class Recipe implements Serializable {
         this.primaryTimer.execute();
     }
 
+    public void removeIngredients() {
+
+    }
+
+    public void removeTimers() {
+
+    }
+
     public void togglePause() {
         this.isActive = !this.isActive;
     }

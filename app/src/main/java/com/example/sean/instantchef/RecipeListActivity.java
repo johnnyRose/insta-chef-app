@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 public class RecipeListActivity extends ActionBarActivity {
-    private RecipeAdapter myAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +22,7 @@ public class RecipeListActivity extends ActionBarActivity {
         setContentView(R.layout.activity_recipe_list);
 
         //set up the list adapter to show all the recipes.
-        myAdapter = new RecipeAdapter(this);
+        RecipeAdapter myAdapter = new RecipeAdapter(this);
         ListView listView = (ListView) findViewById(R.id.recipe_list_view);
         listView.setAdapter(myAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
