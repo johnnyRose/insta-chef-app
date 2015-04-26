@@ -57,7 +57,8 @@
             android:textSize="20dp"
             android:textStyle="bold"
             android:layout_alignRight="@+id/list_recipes_button"
-            android:layout_alignEnd="@+id/list_recipes_button" />
+            android:layout_alignEnd="@+id/list_recipes_button"
+            android:onClick="go_to_create_edit_recipe" />
 
         <Button
             android:layout_width="wrap_content"

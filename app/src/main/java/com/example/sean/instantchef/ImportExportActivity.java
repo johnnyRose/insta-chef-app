@@ -58,7 +58,11 @@ public class ImportExportActivity extends ActionBarActivity {
             Recipe recipe = new Recipe(current_recipe.getString("description"), current_recipe.getString("name"),
                     current_recipe.getString("dateCreated"), current_recipe.getString("createdBy"));
             //TODO: add recipe to database here.
+            MainActivity.recipes.add(recipe);
 
+            //go to the main screen after import.
+            Intent intent = new Intent(this, MainActivity.class);
+            startActivity(intent);
         }
     }
 

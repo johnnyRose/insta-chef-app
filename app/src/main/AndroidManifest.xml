@@ -18,7 +18,7 @@
         </activity>
         <activity
             android:name=".ImportExportActivity"
-            android:label="ImportExportActivity"
+            android:label="Manage External Recipes"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden">
             <meta-data
@@ -27,7 +27,16 @@
         </activity>
         <activity
             android:name=".RecipeListActivity"
-            android:label="RecipeListActivity"
+            android:label="Available Recipes"
+            android:parentActivityName=".MainActivity"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sean.instantchef.MainActivity" />
+        </activity>
+        <activity
+            android:name=".CreateEditActivity"
+            android:label="Create / Edit Recipe"
             android:parentActivityName=".MainActivity"
             android:windowSoftInputMode="stateHidden">
             <meta-data

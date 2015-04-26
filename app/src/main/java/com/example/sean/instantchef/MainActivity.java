@@ -21,9 +21,11 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         //set up a dummy recipe to make sure the recipe adapter is working.
-        Recipe test = new Recipe("test recipe", "test recipe", "", "sean");
-        test.totalTime = "10 minutes";
-        recipes.add(test);
+        if (recipes.size() == 0) {
+            Recipe test = new Recipe("test recipe", "test recipe", "", "sean");
+            test.totalTime = "10 minutes";
+            recipes.add(test);
+        }
     }
 
     public void go_to_import_screen(View view) {
@@ -35,6 +37,12 @@ public class MainActivity extends ActionBarActivity {
     public void go_to_recipe_list(View view) {
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, RecipeListActivity.class);
+        startActivity(intent);
+    }
+
+    public void go_to_create_edit_recipe(View view) {
+        Intent intent = new Intent();
+        intent.setClass(MainActivity.this, CreateEditActivity.class);
         startActivity(intent);
     }
 
