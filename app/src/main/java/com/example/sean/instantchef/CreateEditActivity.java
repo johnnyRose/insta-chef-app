@@ -61,9 +61,21 @@ public class CreateEditActivity extends ActionBarActivity {
         });
         ingredientAdapter.notifyDataSetChanged();
 
-        //TODO: get the intent and see if we're editing a previous recipe or
-        //creating one from scratch. if editing, we'll need to pre-fill
-        //all the boxes on this screen and change the title to "Edit Recipe".
+        Intent intent = getIntent();
+        editing = intent.getBooleanExtra("sean_and_john.edit_recipe.edit", false);
+        if (editing) {
+            recipe_number = intent.getIntExtra("sean_and_john.edit_recipe.number", 0);
+            TextView createRecipeTitleView = (TextView) findViewById(R.id.createRecipeTitleView);
+            createRecipeTitleView.setText("Edit Recipe");
+            TextView nameEditText = (TextView) findViewById(R.id.nameEditText);
+            nameEditText.setText(MainActivity.recipes.get(recipe_number).name);
+            TextView descriptionEditText = (TextView) findViewById(R.id.descriptionEditText);
+            descriptionEditText.setText(MainActivity.recipes.get(recipe_number).description);
+            TextView createdByEditText = (TextView) findViewById(R.id.createdByEditText);
+            createdByEditText.setText(MainActivity.recipes.get(recipe_number).createdBy);
+
+            //TODO: populate the timers and ingredients.
+        }
     }
 
     public void add_ingredient(View view) {

@@ -31,11 +31,21 @@ public class RecipeListActivity extends ActionBarActivity {
                 startRecipe(id);
             }
         });
+        listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getBaseContext(), CreateEditActivity.class);
+                intent.putExtra("sean_and_john.edit_recipe.edit", true);
+                intent.putExtra("sean_and_john.edit_recipe.number", position);
+                startActivity(intent);
+                return true;
+            }
+        });
     }
 
     public void startRecipe(long id) {
         //TODO: uncomment this after we create the RunRecipe screen/class (might need to rename it).
-        //Intent intent = new Intent(this, RunRecipe.class);
+        //Intent intent = new Intent(this, RunRecipeActivity.class);
         //intent.putExtra("sean_and_john.run_recipe.info", id);
         //startActivity(intent);
     }
