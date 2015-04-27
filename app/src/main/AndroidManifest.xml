@@ -43,6 +43,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sean.instantchef.MainActivity" />
         </activity>
+        <activity
+            android:name=".AddIngredientsActivity"
+            android:label=""
+            android:parentActivityName=".CreateEditActivity"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sean.instantchef.MainActivity" />
+        </activity>
+        <activity
+            android:name=".AddTimersActivity"
+            android:label=""
+            android:parentActivityName=".CreateEditActivity"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sean.instantchef.MainActivity" />
+        </activity>
     </application>
-
 </manifest>

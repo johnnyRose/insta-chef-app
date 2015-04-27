@@ -22,8 +22,8 @@ import java.util.Date;
  * Created by sean on 4/25/2015.
  */
 public class CreateEditActivity extends ActionBarActivity {
-    public ArrayList<Ingredient> ingredients = new ArrayList<>();
-    public ArrayList<Timer> timers = new ArrayList<>();
+    public static ArrayList<Ingredient> ingredients = new ArrayList<>();
+    public static ArrayList<Timer> timers = new ArrayList<>();
     private boolean editing = false;
     private int recipe_number;
 
@@ -34,11 +34,11 @@ public class CreateEditActivity extends ActionBarActivity {
         editing = false;
 
         //TODO: delete this later. create a dummy timer and ingredient to test that the adapters work.
-        ingredients.add(new Ingredient(0, "carrots, chopped", "1 cup"));
+        /*ingredients.add(new Ingredient(0, "carrots, chopped", "1 cup"));
         Timer timer = new Timer();
         timer.startDescription = "add carrots, boil until melted";
         timer.secondsRemaining = 60;
-        timers.add(timer);
+        timers.add(timer);*/
 
         //set up both adapters to show ingredients and steps(aka timers).
         IngredientAdapter ingredientAdapter = new IngredientAdapter(this);
@@ -59,6 +59,7 @@ public class CreateEditActivity extends ActionBarActivity {
                 //TODO: decide what behavior we want when the user clicks a timer.
             }
         });
+        ingredientAdapter.notifyDataSetChanged();
 
         //TODO: get the intent and see if we're editing a previous recipe or
         //creating one from scratch. if editing, we'll need to pre-fill
@@ -67,11 +68,14 @@ public class CreateEditActivity extends ActionBarActivity {
 
     public void add_ingredient(View view) {
         //TODO: implement a dialog to add ingredients
+        Intent intent = new Intent(this, AddIngredientsActivity.class);
+        startActivity(intent);
     }
 
     public void add_step(View view) {
         //add a timer to the recipe, the first timer will be the main.
-
+        Intent intent = new Intent(this, AddTimersActivity.class);
+        startActivity(intent);
     }
 
     public void save_recipe(View view) {
@@ -202,4 +206,5 @@ public class CreateEditActivity extends ActionBarActivity {
             return arg1;
         }
     }
+
 }
