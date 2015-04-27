@@ -39,20 +39,13 @@ public class AddTimersActivity extends ActionBarActivity {
     }
 
     public void save_timer(View view) {
-        //TODO: create timers with this.
 
         Step step = new Step();
-
         step.description = ((TextView)findViewById(R.id.timerDescriptionEdit)).getText().toString();
         step.startTime = parseInt(((TextView)findViewById(R.id.timerStartEdit)).getText().toString());
         step.length = parseInt(((TextView)findViewById(R.id.timerLengthEdit)).getText().toString());
 
-        Bundle extras = getIntent().getExtras();
-
-        Recipe rec = MainActivity.recipes.get(CreateEditActivity.recipe_number);
-
-        rec.addStep(step);
-
+        CreateEditActivity.steps.add(step);
         timerAdapter.notifyDataSetChanged();
     }
 
@@ -107,7 +100,9 @@ public class AddTimersActivity extends ActionBarActivity {
             TextView descriptionView = (TextView)arg1.findViewById(R.id.descriptionView);
             TextView timeLeftView = (TextView)arg1.findViewById(R.id.timeLeftView);
             Step step = CreateEditActivity.steps.get(arg0);
-            //timeLeftView.setText(timer.secondsRemaining + " seconds");
+
+            descriptionView.setText(step.description);
+            timeLeftView.setText(step.length + " seconds");
 
             return arg1;
         }

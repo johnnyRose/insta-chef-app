@@ -26,6 +26,7 @@ public class CreateEditActivity extends ActionBarActivity {
     public static ArrayList<Step> steps = new ArrayList<Step>();
     private boolean editing = false;
     public static int recipe_number;
+    public static Recipe current_recipe;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +66,17 @@ public class CreateEditActivity extends ActionBarActivity {
         editing = intent.getBooleanExtra("sean_and_john.edit_recipe.edit", false);
         if (editing) {
             recipe_number = intent.getIntExtra("sean_and_john.edit_recipe.number", 0);
+            current_recipe = MainActivity.recipes.get(recipe_number);
+
             TextView createRecipeTitleView = (TextView) findViewById(R.id.createRecipeTitleView);
             createRecipeTitleView.setText("Edit Recipe");
+
             TextView nameEditText = (TextView) findViewById(R.id.nameEditText);
             nameEditText.setText(MainActivity.recipes.get(recipe_number).name);
+
             TextView descriptionEditText = (TextView) findViewById(R.id.descriptionEditText);
             descriptionEditText.setText(MainActivity.recipes.get(recipe_number).description);
+
             TextView createdByEditText = (TextView) findViewById(R.id.createdByEditText);
             createdByEditText.setText(MainActivity.recipes.get(recipe_number).createdBy);
 
@@ -211,9 +217,10 @@ public class CreateEditActivity extends ActionBarActivity {
             }
             TextView descriptionView = (TextView)arg1.findViewById(R.id.descriptionView);
             TextView timeLeftView = (TextView)arg1.findViewById(R.id.timeLeftView);
-            Step timer = steps.get(arg0);
-            descriptionView.setText(timer.description);
-            //timeLeftView.setText(timer.secondsRemaining + " seconds");
+            Step step = steps.get(arg0);
+
+            descriptionView.setText(step.description);
+            timeLeftView.setText(step.length + " seconds");
 
             return arg1;
         }
