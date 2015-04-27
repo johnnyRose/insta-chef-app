@@ -7,6 +7,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
@@ -16,6 +17,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".ImportExportActivity"
             android:label="Manage External Recipes"
@@ -25,6 +27,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sean.instantchef.MainActivity" />
         </activity>
+
         <activity
             android:name=".RecipeListActivity"
             android:label="Available Recipes"
@@ -34,6 +37,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sean.instantchef.MainActivity" />
         </activity>
+
         <activity
             android:name=".CreateEditActivity"
             android:label="Create / Edit Recipe"
@@ -43,6 +47,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sean.instantchef.MainActivity" />
         </activity>
+
         <activity
             android:name=".AddIngredientsActivity"
             android:label=""
@@ -52,6 +57,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sean.instantchef.MainActivity" />
         </activity>
+
         <activity
             android:name=".AddTimersActivity"
             android:label=""
@@ -61,5 +67,16 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.sean.instantchef.MainActivity" />
         </activity>
+
+        <activity
+            android:name=".RunRecipeActivity"
+            android:label=""
+            android:parentActivityName=".RecipeListActivity"
+            android:windowSoftInputMode="stateHidden">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.sean.instantchef.MainActivity" />
+        </activity>
+
     </application>
 </manifest>

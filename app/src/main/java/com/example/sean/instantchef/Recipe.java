@@ -16,10 +16,11 @@ public class Recipe implements Serializable {
     public String name; // recipe name
     public String dateCreated; // date created
     public String createdBy; // author
-    public Timer primaryTimer; // main recipe timer
     public String totalTime; //total time to run the recipe as a string.
     public boolean isActive; // pause/resume timer execution
+
     public ArrayList<Ingredient> ingredients;
+    public ArrayList<Step> steps;
 
     public Recipe(String description, String name, String dateCreated, String createdBy) {
         this.description = description;
@@ -31,8 +32,6 @@ public class Recipe implements Serializable {
 
     public Recipe() {
         this.dateCreated = new Date().toString(); // current date and time
-        this.primaryTimer = new Timer();
-        this.primaryTimer.setRecipe(this);
         this.isActive = false;
         this.ingredients = new ArrayList<Ingredient>();
         this.id = recipe_index++;
@@ -40,28 +39,17 @@ public class Recipe implements Serializable {
 
     public void start() {
         this.isActive = true;
-        this.primaryTimer.execute();
+
+
+
     }
 
     public void removeIngredients() {
 
     }
 
-    public void removeTimers() {
-
-    }
-
     public void togglePause() {
         this.isActive = !this.isActive;
-    }
-
-    public void addTimer(Timer parentTimer, Timer newTimer) {
-        newTimer.setRecipe(this);
-        parentTimer.timers.add(newTimer);
-    }
-
-    public void removeTimer(Timer parentTimer, Timer targetTimer) {
-        parentTimer.timers.remove(targetTimer);
     }
 
     public void addIngredient(Ingredient ingredient) {

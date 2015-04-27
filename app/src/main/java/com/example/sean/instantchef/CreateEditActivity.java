@@ -22,8 +22,8 @@ import java.util.Date;
  * Created by sean on 4/25/2015.
  */
 public class CreateEditActivity extends ActionBarActivity {
-    public static ArrayList<Ingredient> ingredients = new ArrayList<>();
-    public static ArrayList<Timer> timers = new ArrayList<>();
+    public static ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+    public static ArrayList<Step> steps = new ArrayList<Step>();
     private boolean editing = false;
     private int recipe_number;
 
@@ -89,7 +89,7 @@ public class CreateEditActivity extends ActionBarActivity {
         String given_created_by = createdByEditText.getText().toString();
 
         //bare-minimum to create a recipe is a name, 1 ingredient and 1 timer.
-        if (given_name.equals("") || ingredients.size() == 0 || timers.size() == 0) {
+        if (given_name.equals("") || ingredients.size() == 0 || steps.size() == 0) {
             Toast.makeText(this, "Not enough information to save the recipe. You must"
                     + " have at least 1 ingredient, 1 step, and a name.", Toast.LENGTH_LONG).show();
             return;
@@ -181,11 +181,11 @@ public class CreateEditActivity extends ActionBarActivity {
         }
         @Override
         public int getCount() {
-            return timers.size();
+            return steps.size();
         }
         @Override
         public Object getItem(int arg0) {
-            return timers.get(arg0);
+            return steps.get(arg0);
         }
         @Override
         public long getItemId(int arg0) {
@@ -199,9 +199,9 @@ public class CreateEditActivity extends ActionBarActivity {
             }
             TextView descriptionView = (TextView)arg1.findViewById(R.id.descriptionView);
             TextView timeLeftView = (TextView)arg1.findViewById(R.id.timeLeftView);
-            Timer timer = timers.get(arg0);
-            descriptionView.setText(timer.startDescription);
-            timeLeftView.setText(timer.secondsRemaining + " seconds");
+            Step timer = steps.get(arg0);
+            descriptionView.setText(timer.description);
+            //timeLeftView.setText(timer.secondsRemaining + " seconds");
 
             return arg1;
         }

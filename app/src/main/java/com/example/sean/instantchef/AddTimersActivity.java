@@ -73,11 +73,11 @@ public class AddTimersActivity extends ActionBarActivity {
         }
         @Override
         public int getCount() {
-            return CreateEditActivity.timers.size();
+            return CreateEditActivity.steps.size();
         }
         @Override
         public Object getItem(int arg0) {
-            return CreateEditActivity.timers.get(arg0);
+            return CreateEditActivity.steps.get(arg0);
         }
         @Override
         public long getItemId(int arg0) {
@@ -91,9 +91,8 @@ public class AddTimersActivity extends ActionBarActivity {
             }
             TextView descriptionView = (TextView)arg1.findViewById(R.id.descriptionView);
             TextView timeLeftView = (TextView)arg1.findViewById(R.id.timeLeftView);
-            Timer timer = CreateEditActivity.timers.get(arg0);
-            descriptionView.setText(timer.startDescription);
-            timeLeftView.setText(timer.secondsRemaining + " seconds");
+            Step step = CreateEditActivity.steps.get(arg0);
+            //timeLeftView.setText(timer.secondsRemaining + " seconds");
 
             return arg1;
         }
