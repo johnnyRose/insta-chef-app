@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static java.lang.Integer.parseInt;
+
 /**
  * Created by sean on 4/26/2015.
  */
@@ -38,6 +40,19 @@ public class AddTimersActivity extends ActionBarActivity {
 
     public void save_timer(View view) {
         //TODO: create timers with this.
+
+        Step step = new Step();
+
+        step.description = ((TextView)findViewById(R.id.timerDescriptionEdit)).getText().toString();
+        step.startTime = parseInt(((TextView)findViewById(R.id.timerStartEdit)).getText().toString());
+        step.length = parseInt(((TextView)findViewById(R.id.timerLengthEdit)).getText().toString());
+
+        Bundle extras = getIntent().getExtras();
+
+        Recipe rec = MainActivity.recipes.get(CreateEditActivity.recipe_number);
+
+        rec.addStep(step);
+
         timerAdapter.notifyDataSetChanged();
     }
 

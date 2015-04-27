@@ -25,7 +25,7 @@ public class CreateEditActivity extends ActionBarActivity {
     public static ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
     public static ArrayList<Step> steps = new ArrayList<Step>();
     private boolean editing = false;
-    private int recipe_number;
+    public static int recipe_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

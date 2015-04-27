@@ -44,6 +44,10 @@ public class Recipe implements Serializable {
 
     }
 
+    public void addStep(Step step) {
+        this.steps.add(step);
+    }
+
     public void removeIngredients() {
 
     }
