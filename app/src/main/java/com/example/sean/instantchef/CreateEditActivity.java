@@ -24,62 +24,66 @@ import java.util.Date;
 public class CreateEditActivity extends ActionBarActivity {
     public static ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
     public static ArrayList<Step> steps = new ArrayList<Step>();
-    private boolean editing = false;
-    public static int recipe_number;
     public static Recipe current_recipe;
+    public static IngredientAdapter ingredientAdapter;
+    public static TimerAdapter timerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_recipe);
 
-        //TODO: delete this later. create a dummy timer and ingredient to test that the adapters work.
-        /*ingredients.add(new Ingredient(0, "carrots, chopped", "1 cup"));
-        Timer timer = new Timer();
-        timer.startDescription = "add carrots, boil until melted";
-        timer.secondsRemaining = 60;
-        timers.add(timer);*/
-
         //set up both adapters to show ingredients and steps(aka timers).
-        IngredientAdapter ingredientAdapter = new IngredientAdapter(this);
+        ingredientAdapter = new IngredientAdapter(this);
         ListView listView1 = (ListView) findViewById(R.id.ingredientListView);
         listView1.setAdapter(ingredientAdapter);
         listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: decide what behavior we want when the user clicks an ingredient.
+                //TODO: decide what behavior we want when the user clicks an ingredient, if any.
             }
         });
-        TimerAdapter timerAdapter = new TimerAdapter(this);
+        timerAdapter = new TimerAdapter(this);
         ListView listView2 = (ListView) findViewById(R.id.timerListView);
         listView2.setAdapter(timerAdapter);
         listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: decide what behavior we want when the user clicks a timer.
+                //TODO: decide what behavior we want when the user clicks a timer, if any.
             }
         });
         ingredientAdapter.notifyDataSetChanged();
 
         Intent intent = getIntent();
-        editing = intent.getBooleanExtra("sean_and_john.edit_recipe.edit", false);
-        if (editing) {
-            recipe_number = intent.getIntExtra("sean_and_john.edit_recipe.number", 0);
-            current_recipe = MainActivity.recipes.get(recipe_number);
+
+        if (MainActivity.editing) {
+            MainActivity.recipe_number = intent.getIntExtra("sean_and_john.edit_recipe.number", 0);
+            current_recipe = MainActivity.recipes.get(MainActivity.recipe_number);
 
             TextView createRecipeTitleView = (TextView) findViewById(R.id.createRecipeTitleView);
             createRecipeTitleView.setText("Edit Recipe");
 
             TextView nameEditText = (TextView) findViewById(R.id.nameEditText);
-            nameEditText.setText(MainActivity.recipes.get(recipe_number).name);
+            nameEditText.setText(MainActivity.recipes.get(MainActivity.recipe_number).name);
 
             TextView descriptionEditText = (TextView) findViewById(R.id.descriptionEditText);
-            descriptionEditText.setText(MainActivity.recipes.get(recipe_number).description);
+            descriptionEditText.setText(MainActivity.recipes.get(MainActivity.recipe_number).description);
 
             TextView createdByEditText = (TextView) findViewById(R.id.createdByEditText);
-            createdByEditText.setText(MainActivity.recipes.get(recipe_number).createdBy);
+            createdByEditText.setText(MainActivity.recipes.get(MainActivity.recipe_number).createdBy);
+        } else {
+            //new recipe, clear everything.
+            TextView createRecipeTitleView = (TextView) findViewById(R.id.createRecipeTitleView);
+            createRecipeTitleView.setText("New Recipe");
 
-            //TODO: populate the timers and ingredients.
+            TextView nameEditText = (TextView) findViewById(R.id.nameEditText);
+            nameEditText.setText("");
+
+            TextView descriptionEditText = (TextView) findViewById(R.id.descriptionEditText);
+            descriptionEditText.setText("");
+
+            TextView createdByEditText = (TextView) findViewById(R.id.createdByEditText);
+            createdByEditText.setText("");
         }
     }
 
@@ -112,10 +116,11 @@ public class CreateEditActivity extends ActionBarActivity {
             return;
         }
 
-        //TODO: fix this. saves a copy when edited should be 0;
         Recipe recipe;
-        if (editing) {
-            recipe = MainActivity.recipes.get(recipe_number);
+        if (MainActivity.editing) {
+            //copy the original and delete it
+            recipe = MainActivity.recipes.get(MainActivity.recipe_number);
+            //MainActivity.recipes.remove(MainActivity.recipe_number);
             recipe.name = given_name;
             recipe.description = given_description;
             recipe.createdBy = given_created_by;
@@ -131,7 +136,7 @@ public class CreateEditActivity extends ActionBarActivity {
             recipe.ingredients.add(CreateEditActivity.ingredients.get(i));
         }
         recipe.deleteSteps();
-        for (int i = 0; i < ingredients.size(); i++) {
+        for (int i = 0; i < steps.size(); i++) {
             recipe.steps.add(CreateEditActivity.steps.get(i));
         }
 
@@ -140,6 +145,7 @@ public class CreateEditActivity extends ActionBarActivity {
         CreateEditActivity.steps = new ArrayList<>();
 
         //go to the main screen after saving.
+        MainActivity.editing = false;
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }

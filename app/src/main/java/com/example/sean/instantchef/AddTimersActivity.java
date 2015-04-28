@@ -14,6 +14,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import static java.lang.Integer.parseInt;
 
 /**
@@ -33,20 +35,34 @@ public class AddTimersActivity extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: decide what behavior we want when the user clicks an ingredient.
+                //TODO: decide what behavior we want when the user clicks a step.
+                CreateEditActivity.steps.remove(position);
+                timerAdapter.notifyDataSetChanged();
             }
         });
     }
 
     public void save_timer(View view) {
+        TextView desc = (TextView)findViewById(R.id.timerDescriptionEdit);
+        TextView start = (TextView)findViewById(R.id.timerStartEdit);
+        TextView length = (TextView)findViewById(R.id.timerLengthEdit);
 
-        Step step = new Step();
-        step.description = ((TextView)findViewById(R.id.timerDescriptionEdit)).getText().toString();
-        step.startTime = parseInt(((TextView)findViewById(R.id.timerStartEdit)).getText().toString());
-        step.length = parseInt(((TextView)findViewById(R.id.timerLengthEdit)).getText().toString());
+        if (desc.getText().toString().equals("") || start.getText().toString().equals("") || length.getText().toString().equals("")) {
+            Toast.makeText(this, "Not enough information to save the step. You must"
+                    + " have a description, a start time and a length.", Toast.LENGTH_LONG).show();
+        } else {
+            Step step = new Step();
+            step.description = desc.getText().toString();
+            step.startTime = parseInt(start.getText().toString()); //TODO: type checking. user could enter a string.
+            step.length = parseInt(length.getText().toString());  //TODO: type checking. user could enter a string.
 
-        CreateEditActivity.steps.add(step);
-        timerAdapter.notifyDataSetChanged();
+            CreateEditActivity.steps.add(step);
+            timerAdapter.notifyDataSetChanged();
+
+            desc.setText("");
+            start.setText("");
+            length.setText("");
+        }
     }
 
     @Override

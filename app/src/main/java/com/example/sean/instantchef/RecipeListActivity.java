@@ -14,6 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 public class RecipeListActivity extends ActionBarActivity {
 
     @Override
@@ -31,11 +33,26 @@ public class RecipeListActivity extends ActionBarActivity {
                 startRecipe(id);
             }
         });
+        //myAdapter.notifyDataSetChanged();
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                //editing a recipe, set the 2 lists on the next screen.
+                //make a deep copy so the original stays intact.
+                CreateEditActivity.ingredients = new ArrayList<>();
+                CreateEditActivity.steps = new ArrayList<>();
+                for (int i = 0; i < MainActivity.recipes.get(position).ingredients.size(); i++) {
+                    CreateEditActivity.ingredients.add(MainActivity.recipes.get(position).ingredients.get(position));
+                }
+                for (int i = 0; i < MainActivity.recipes.get(position).steps.size(); i++) {
+                    CreateEditActivity.steps.add(MainActivity.recipes.get(position).steps.get(position));
+                }
+                //CreateEditActivity.ingredients = MainActivity.recipes.get(position).ingredients;
+                //CreateEditActivity.steps = MainActivity.recipes.get(position).steps;
+
                 Intent intent = new Intent(getBaseContext(), CreateEditActivity.class);
-                intent.putExtra("sean_and_john.edit_recipe.edit", true);
+                MainActivity.editing = true;
+                intent.putExtra("sean_and_john.edit_recipe.incoming", true);
                 intent.putExtra("sean_and_john.edit_recipe.number", position);
                 startActivity(intent);
                 return true;

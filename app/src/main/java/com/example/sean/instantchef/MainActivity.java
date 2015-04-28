@@ -14,23 +14,13 @@ public class MainActivity extends ActionBarActivity {
     //storing recipes in an arraylist for now, just to simplify the code.
     //we can tie this into a persistent database fairly easy later on.
     public static ArrayList<Recipe> recipes = new ArrayList<>();
+    public static boolean editing = false;
+    public static int recipe_number;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        //TODO: delete after testing.
-        //set up a dummy recipe to make sure the recipe adapter is working.
-        /*if (recipes.size() == 0) {
-            Recipe test = new Recipe("test recipe", "test recipe", "", "sean");
-            test.totalTime = "10 minutes";
-            test.ingredients.add(new Ingredient(0, "pizza", "one"));
-            test.ingredients.add(new Ingredient(1, "pepperoni", "16"));
-            test.steps.add(new Step(0, "boil", 0, 40));
-            test.steps.add(new Step(1, "boil more", 30, 40));
-            recipes.add(test); recipes.add(test); //add it twice to make sure multiple recipes work.
-        }*/
     }
 
     public void go_to_import_screen(View view) {
@@ -46,6 +36,11 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void go_to_create_edit_recipe(View view) {
+        //new recipe, clear the 2 lists on the next screen.
+        CreateEditActivity.ingredients = new ArrayList<>();
+        CreateEditActivity.steps = new ArrayList<>();
+        editing = false;
+
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, CreateEditActivity.class);
         intent.putExtra("sean_and_john.edit_recipe.edit", false);

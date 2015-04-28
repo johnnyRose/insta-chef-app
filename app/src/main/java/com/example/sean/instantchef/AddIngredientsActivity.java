@@ -18,20 +18,23 @@ import android.widget.Toast;
  * Created by sean on 4/26/2015.
  */
 public class AddIngredientsActivity extends ActionBarActivity {
-    private IngredientAdapter ingredientAdapter;
+    private IngredientAdapter ingredientAdapter2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ingredients);
 
-        ingredientAdapter = new IngredientAdapter(this);
+        ingredientAdapter2 = new IngredientAdapter(this);
         ListView listView = (ListView) findViewById(R.id.ingredientScreenListView);
-        listView.setAdapter(ingredientAdapter);
+        listView.setAdapter(ingredientAdapter2);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //TODO: decide what behavior we want when the user clicks an ingredient.
+                CreateEditActivity.ingredients.remove(position);
+                CreateEditActivity.ingredientAdapter.notifyDataSetChanged();
+                ingredientAdapter2.notifyDataSetChanged();
             }
         });
     }
@@ -45,7 +48,8 @@ public class AddIngredientsActivity extends ActionBarActivity {
         } else {
             Ingredient ingredient = new Ingredient(0, desc.getText().toString(), amt.getText().toString());
             CreateEditActivity.ingredients.add(ingredient);
-            ingredientAdapter.notifyDataSetChanged();
+            ingredientAdapter2.notifyDataSetChanged();
+            CreateEditActivity.ingredientAdapter.notifyDataSetChanged();
             desc.setText("");
             amt.setText("");
         }
