@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
 
         //TODO: delete after testing.
         //set up a dummy recipe to make sure the recipe adapter is working.
-        if (recipes.size() == 0) {
+        /*if (recipes.size() == 0) {
             Recipe test = new Recipe("test recipe", "test recipe", "", "sean");
             test.totalTime = "10 minutes";
             test.ingredients.add(new Ingredient(0, "pizza", "one"));
@@ -30,7 +30,7 @@ public class MainActivity extends ActionBarActivity {
             test.steps.add(new Step(0, "boil", 0, 40));
             test.steps.add(new Step(1, "boil more", 30, 40));
             recipes.add(test); recipes.add(test); //add it twice to make sure multiple recipes work.
-        }
+        }*/
     }
 
     public void go_to_import_screen(View view) {

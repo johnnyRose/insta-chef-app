@@ -49,20 +49,12 @@ public class ImportExportActivity extends ActionBarActivity {
         //apparently android API has no built-in support for a file chooser. lame.
 
         //we'll use a hardcoded JSON string for now to work out the parsing, see the bottom of this file for the pretty version.
-        String json_string = "{\"recipe0\":{\"id\":0,\"description\":\"test recipe\",\"imagePath\":\"/dev/null/\",\"name\":\"Test Recipe\",\"dateCreated\":\"4/10/2015\",\"createdBy\":\"Sean Porter\",\"isActive\":false,\"totalTime\":60,\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"carrots, sliced\",\"amount\":\"1 whole\"},\"ingredient1\":{\"id\":1,\"description\":\"onion, chopped\",\"amount\":\"1/2\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"boil eggs until done\",\"startTime\":0,\"length\":30},\"step1\":{\"id\":1,\"description\":\"let cool\",\"startTime\":30,\"length\":30}}},\"recipe1\":{\"id\":1,\"description\":\"test recipe 2\",\"imagePath\":\"/dev/null/\",\"name\":\"Test Recipe 2\",\"dateCreated\":\"4/10/2015\",\"createdBy\":\"Sean Porter\",\"isActive\":false,\"totalTime\":60,\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"carrots, juiced\",\"amount\":\"1/2\"},\"ingredient1\":{\"id\":1,\"description\":\"onion, chopped\",\"amount\":\"1 whole\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"boil carrots until brown\",\"startTime\":0,\"length\":30},\"step1\":{\"id\":1,\"description\":\"let cool\",\"startTime\":30,\"length\":30}}}}";
-        JSONObject json_file = new JSONObject(json_string);
+        String json_string = "{\"recipe0\":{\"id\":0,\"description\":\"test recipe\",\"name\":\"test recipe3\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"pizza\",\"amount\":\"one\"},\"ingredient1\":{\"id\":1,\"description\":\"pepperoni\",\"amount\":\"16\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"boil\",\"startTime\":0,\"length\":40},\"step1\":{\"id\":1,\"description\":\"boil more\",\"startTime\":30,\"length\":40}}},\"recipe1\":{\"id\":0,\"description\":\"test recipe\",\"name\":\"test recipe4\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"pizza\",\"amount\":\"one\"},\"ingredient1\":{\"id\":1,\"description\":\"pepperoni\",\"amount\":\"16\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"boil\",\"startTime\":0,\"length\":40},\"step1\":{\"id\":1,\"description\":\"boil more\",\"startTime\":30,\"length\":40}}}}";
+        Recipe.importRecipes(json_string);
 
-        for (int i = 0; i < json_file.length(); i++) {
-            JSONObject current_recipe = json_file.getJSONObject("recipe" + i);
-            Recipe recipe = new Recipe(current_recipe.getString("description"), current_recipe.getString("name"),
-                    current_recipe.getString("dateCreated"), current_recipe.getString("createdBy"));
-            //TODO: add recipe to database here.
-            MainActivity.recipes.add(recipe);
-
-            //go to the main screen after import.
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }
+        //go to the main screen after import.
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
     public void export_file(View view) {
@@ -84,72 +76,64 @@ public class ImportExportActivity extends ActionBarActivity {
     "recipe0": {
         "id": 0,
         "description": "test recipe",
-        "imagePath": "/dev/null/",
-        "name": "Test Recipe",
-        "dateCreated": "4/10/2015",
-        "createdBy": "Sean Porter",
-        "isActive": false,
-        "totalTime": 60,
+        "name": "test recipe3",
+        "dateCreated": "",
         "ingredients": {
             "ingredient0": {
                 "id": 0,
-                "description": "carrots, sliced",
-                "amount": "1 whole"
+                "description": "pizza",
+                "amount": "one"
             },
             "ingredient1": {
                 "id": 1,
-                "description": "onion, chopped",
-                "amount": "1/2"
+                "description": "pepperoni",
+                "amount": "16"
             }
         },
         "steps": {
             "step0": {
                 "id": 0,
-                "description": "boil eggs until done",
+                "description": "boil",
                 "startTime": 0,
-                "length": 30
+                "length": 40
             },
             "step1": {
                 "id": 1,
-                "description": "let cool",
+                "description": "boil more",
                 "startTime": 30,
-                "length": 30
+                "length": 40
             }
         }
     },
     "recipe1": {
-        "id": 1,
-        "description": "test recipe 2",
-        "imagePath": "/dev/null/",
-        "name": "Test Recipe 2",
-        "dateCreated": "4/10/2015",
-        "createdBy": "Sean Porter",
-        "isActive": false,
-        "totalTime": 60,
+        "id": 0,
+        "description": "test recipe",
+        "name": "test recipe4",
+        "dateCreated": "",
         "ingredients": {
             "ingredient0": {
                 "id": 0,
-                "description": "carrots, juiced",
-                "amount": "1/2"
+                "description": "pizza",
+                "amount": "one"
             },
             "ingredient1": {
                 "id": 1,
-                "description": "onion, chopped",
-                "amount": "1 whole"
+                "description": "pepperoni",
+                "amount": "16"
             }
         },
         "steps": {
             "step0": {
                 "id": 0,
-                "description": "boil carrots until brown",
+                "description": "boil",
                 "startTime": 0,
-                "length": 30
+                "length": 40
             },
             "step1": {
                 "id": 1,
-                "description": "let cool",
+                "description": "boil more",
                 "startTime": 30,
-                "length": 30
+                "length": 40
             }
         }
     }

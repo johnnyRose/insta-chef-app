@@ -1,5 +1,9 @@
 package com.example.sean.instantchef;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -81,8 +85,6 @@ public class Recipe implements Serializable {
             }
         }
         ingredients_string += "}";
-        //System.out.println("steps = " + steps_string);
-        //System.out.println("ingredients = " + ingredients_string);
         return "{\"id\":" + this.id + ", \"description\":\"" + this.description
                 + "\", \"name\":\"" + this.name + "\", \"dateCreated\":\"" + this.dateCreated
                 + "\", \"ingredients\":" + ingredients_string + ", \"steps\":" + steps_string + "}";
@@ -94,5 +96,43 @@ public class Recipe implements Serializable {
 
     public void deleteSteps() {
         this.steps = new ArrayList<>();
+    }
+
+    public static void importRecipes(String json_string) throws JSONException {
+        //import a json_string of recipes into the program.
+        JSONObject json_file = new JSONObject(json_string);
+
+        for (int i = 0; i < json_file.length(); i++) {
+            JSONObject json_recipe = json_file.getJSONObject("recipe" + i);
+            Recipe recipe = new Recipe(json_recipe.getString("description"), json_recipe.getString("name"),
+                    json_recipe.getString("dateCreated"), "");
+
+            //JSONObject json_ingredients = new JSONObject(json_file.getString("ingredients"));
+            JSONObject json_ingredients = json_recipe.getJSONObject("ingredients");
+            for (int j = 0; j < json_ingredients.length(); j++) {
+                JSONObject json_ingredient = json_ingredients.getJSONObject("ingredient" + j);
+                Ingredient ingredient = new Ingredient(json_ingredient.getInt("id"),
+                                                       json_ingredient.getString("description"),
+                                                       json_ingredient.getString("amount"));
+                recipe.ingredients.add(ingredient);
+            }
+
+            JSONObject json_steps = json_recipe.getJSONObject("steps");
+            for (int j = 0; j < json_steps.length(); j++) {
+                JSONObject json_step = json_steps.getJSONObject("step" + j);
+                Step step = new Step(json_step.getInt("id"),
+                                     json_step.getString("description"),
+                                     json_step.getInt("startTime"),
+                                     json_step.getInt("length"));
+                recipe.steps.add(step);
+            }
+            //TODO: add recipe to the database.
+            MainActivity.recipes.add(recipe);
+        }
+    }
+
+    public static Recipe deserialize(String recipe_string) {
+
+        return new Recipe();
     }
 }
