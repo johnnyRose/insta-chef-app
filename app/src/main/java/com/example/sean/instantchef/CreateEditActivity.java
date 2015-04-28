@@ -32,7 +32,6 @@ public class CreateEditActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_edit_recipe);
-        editing = false;
 
         //TODO: delete this later. create a dummy timer and ingredient to test that the adapters work.
         /*ingredients.add(new Ingredient(0, "carrots, chopped", "1 cup"));
@@ -113,17 +112,32 @@ public class CreateEditActivity extends ActionBarActivity {
             return;
         }
 
+        //TODO: fix this. saves a copy when edited should be 0;
+        Recipe recipe;
         if (editing) {
-            Recipe recipe = MainActivity.recipes.get(recipe_number);
+            recipe = MainActivity.recipes.get(recipe_number);
             recipe.name = given_name;
             recipe.description = given_description;
             recipe.createdBy = given_created_by;
         } else {
-            Recipe recipe = new Recipe(given_description, given_name, new Date().toString(), given_created_by);
+            recipe = new Recipe(given_description, given_name, new Date().toString(), given_created_by);
             //TODO: add recipe to the database.
             MainActivity.recipes.add(recipe);
         }
-        //TODO: add timers and ingredients to the recipe.
+
+        //add the ingredients and steps to the recipe.
+        recipe.deleteIngredients();
+        for (int i = 0; i < ingredients.size(); i++) {
+            recipe.ingredients.add(CreateEditActivity.ingredients.get(i));
+        }
+        recipe.deleteSteps();
+        for (int i = 0; i < ingredients.size(); i++) {
+            recipe.steps.add(CreateEditActivity.steps.get(i));
+        }
+
+        //delete the ingredients and steps from this class for later
+        CreateEditActivity.ingredients = new ArrayList<>();
+        CreateEditActivity.steps = new ArrayList<>();
 
         //go to the main screen after saving.
         Intent intent = new Intent(this, MainActivity.class);

@@ -15,8 +15,18 @@ public class Step implements Serializable {
     public int startTime; // At what point in the recipe's life should this timer begin?
     public int length;
 
+    public Step(int id, String description, int startTime, int length) {
+        this.id = id;
+        this.description = description;
+        this.startTime = startTime;
+        this.length = length;
+    }
+
+    public Step() {
+
+    }
+
     public String serialize() {
-        // see note in Timer.serialize()
         return "{\"id\":" + this.id + ", \"description\":\"" + this.description +  "\", \"startTime\":"
                 + this.startTime +  ", \"length\":" + this.length +"}";
     }

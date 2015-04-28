@@ -20,11 +20,16 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //TODO: delete after testing.
         //set up a dummy recipe to make sure the recipe adapter is working.
         if (recipes.size() == 0) {
             Recipe test = new Recipe("test recipe", "test recipe", "", "sean");
             test.totalTime = "10 minutes";
-            recipes.add(test);
+            test.ingredients.add(new Ingredient(0, "pizza", "one"));
+            test.ingredients.add(new Ingredient(1, "pepperoni", "16"));
+            test.steps.add(new Step(0, "boil", 0, 40));
+            test.steps.add(new Step(1, "boil more", 30, 40));
+            recipes.add(test); recipes.add(test); //add it twice to make sure multiple recipes work.
         }
     }
 
@@ -43,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
     public void go_to_create_edit_recipe(View view) {
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, CreateEditActivity.class);
+        intent.putExtra("sean_and_john.edit_recipe.edit", false);
         startActivity(intent);
     }
 

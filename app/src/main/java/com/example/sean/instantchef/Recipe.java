@@ -19,8 +19,8 @@ public class Recipe implements Serializable {
     public String totalTime; //total time to run the recipe as a string.
     public boolean isActive; // pause/resume timer execution
 
-    public ArrayList<Ingredient> ingredients;
-    public ArrayList<Step> steps;
+    public ArrayList<Ingredient> ingredients = new ArrayList<>();
+    public ArrayList<Step> steps = new ArrayList<>();
 
     public Recipe(String description, String name, String dateCreated, String createdBy) {
         this.description = description;
@@ -65,28 +65,34 @@ public class Recipe implements Serializable {
     }
 
     public String serialize() {
-        /*
+        String steps_string = "{";
+        String ingredients_string = "{";
+        for (int i = 0; i < this.steps.size(); i++) {
+            steps_string += "\"step" + i + "\": " + this.steps.get(i).serialize();
+            if (i < this.steps.size() - 1) {
+                steps_string += ", "; //add a comma after every step except the last.
+            }
+        }
+        steps_string += "}";
+        for (int i = 0; i < this.ingredients.size(); i++) {
+            ingredients_string += "\"ingredient" + i + "\": " + this.ingredients.get(i).serialize();
+            if (i < this.ingredients.size() - 1) {
+                ingredients_string += ", "; //add a comma after every ingredient except the last.
+            }
+        }
+        ingredients_string += "}";
+        //System.out.println("steps = " + steps_string);
+        //System.out.println("ingredients = " + ingredients_string);
+        return "{\"id\":" + this.id + ", \"description\":\"" + this.description
+                + "\", \"name\":\"" + this.name + "\", \"dateCreated\":\"" + this.dateCreated
+                + "\", \"ingredients\":" + ingredients_string + ", \"steps\":" + steps_string + "}";
+    }
 
-        haven't quite figured this out. to avoid circular serialization however,
-        before serialization we will need to set each timer's recipe to null
-        just before serialization occurs. when we de-serialize, every timer's
-        recipe will need to be set to the main recipe. i think there is a cleaner
-        way to do this, but it isn't inherently obvious to me right now.
+    public void deleteIngredients() {
+        this.ingredients = new ArrayList<>();
+    }
 
-
-
-        problem: when Recipe.isActive is false, all timers need to pause. currently,
-        this is implemented by checking the recipe's isActive boolean before every
-        loop, while the timer's value is still greater than 0. however, having a
-        recipe on timers and timers on recipes will make it impossible to serialize.
-
-        solution: use a database to store recipes, with a single foreign key to timer.ID.
-        each timer contains a recursive one-to-many FK to timer.ID. each timer will also
-        contain a FK of the recipe.ID.
-
-        i wonder if android studio has a package equivalent to Entity Framework.
-
-        */
-        return "";
+    public void deleteSteps() {
+        this.steps = new ArrayList<>();
     }
 }
