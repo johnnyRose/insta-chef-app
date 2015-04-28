@@ -98,41 +98,43 @@ public class Recipe implements Serializable {
         this.steps = new ArrayList<>();
     }
 
+    //import a json_string of recipes into the program.
     public static void importRecipes(String json_string) throws JSONException {
-        //import a json_string of recipes into the program.
         JSONObject json_file = new JSONObject(json_string);
 
         for (int i = 0; i < json_file.length(); i++) {
-            JSONObject json_recipe = json_file.getJSONObject("recipe" + i);
-            Recipe recipe = new Recipe(json_recipe.getString("description"), json_recipe.getString("name"),
-                    json_recipe.getString("dateCreated"), "");
-
-            //JSONObject json_ingredients = new JSONObject(json_file.getString("ingredients"));
-            JSONObject json_ingredients = json_recipe.getJSONObject("ingredients");
-            for (int j = 0; j < json_ingredients.length(); j++) {
-                JSONObject json_ingredient = json_ingredients.getJSONObject("ingredient" + j);
-                Ingredient ingredient = new Ingredient(json_ingredient.getInt("id"),
-                                                       json_ingredient.getString("description"),
-                                                       json_ingredient.getString("amount"));
-                recipe.ingredients.add(ingredient);
-            }
-
-            JSONObject json_steps = json_recipe.getJSONObject("steps");
-            for (int j = 0; j < json_steps.length(); j++) {
-                JSONObject json_step = json_steps.getJSONObject("step" + j);
-                Step step = new Step(json_step.getInt("id"),
-                                     json_step.getString("description"),
-                                     json_step.getInt("startTime"),
-                                     json_step.getInt("length"));
-                recipe.steps.add(step);
-            }
+            String json_recipe = json_file.getString("recipe" + i);
+            Recipe recipe = Recipe.deserialize(json_recipe);
             //TODO: add recipe to the database.
             MainActivity.recipes.add(recipe);
         }
     }
 
-    public static Recipe deserialize(String recipe_string) {
+    //deserializes a JSON string into a recipe object.
+    public static Recipe deserialize(String recipe_string) throws JSONException {
+        JSONObject json_recipe = new JSONObject(recipe_string);
+        Recipe recipe = new Recipe(json_recipe.getString("description"), json_recipe.getString("name"),
+                json_recipe.getString("dateCreated"), "");
 
-        return new Recipe();
+        //JSONObject json_ingredients = new JSONObject(json_file.getString("ingredients"));
+        JSONObject json_ingredients = json_recipe.getJSONObject("ingredients");
+        for (int j = 0; j < json_ingredients.length(); j++) {
+            JSONObject json_ingredient = json_ingredients.getJSONObject("ingredient" + j);
+            Ingredient ingredient = new Ingredient(json_ingredient.getInt("id"),
+                    json_ingredient.getString("description"),
+                    json_ingredient.getString("amount"));
+            recipe.ingredients.add(ingredient);
+        }
+
+        JSONObject json_steps = json_recipe.getJSONObject("steps");
+        for (int j = 0; j < json_steps.length(); j++) {
+            JSONObject json_step = json_steps.getJSONObject("step" + j);
+            Step step = new Step(json_step.getInt("id"),
+                    json_step.getString("description"),
+                    json_step.getInt("startTime"),
+                    json_step.getInt("length"));
+            recipe.steps.add(step);
+        }
+        return recipe;
     }
 }
