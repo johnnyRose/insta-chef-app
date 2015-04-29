@@ -23,8 +23,8 @@ public class Recipe implements Serializable {
     public String totalTime; //total time to run the recipe as a string.
     public boolean isActive; // pause/resume timer execution
 
-    public ArrayList<Ingredient> ingredients = new ArrayList<>();
-    public ArrayList<Step> steps = new ArrayList<>();
+    public ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
+    public ArrayList<Step> steps = new ArrayList<Step>();
 
     public Recipe(String description, String name, String dateCreated, String createdBy) {
         this.description = description;
@@ -43,9 +43,6 @@ public class Recipe implements Serializable {
 
     public void start() {
         this.isActive = true;
-
-
-
     }
 
     public void addStep(Step step) {

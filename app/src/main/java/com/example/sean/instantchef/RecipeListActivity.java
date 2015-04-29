@@ -62,9 +62,9 @@ public class RecipeListActivity extends ActionBarActivity {
 
     public void startRecipe(long id) {
         //TODO: uncomment this after we create the RunRecipe screen/class (might need to rename it).
-        //Intent intent = new Intent(this, RunRecipeActivity.class);
-        //intent.putExtra("sean_and_john.run_recipe.info", id);
-        //startActivity(intent);
+        Intent intent = new Intent(this, RunRecipeActivity.class);
+        intent.putExtra("sean_and_john.run_recipe.info", id);
+        startActivity(intent);
     }
 
     @Override
