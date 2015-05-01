@@ -22,6 +22,7 @@ public class Recipe implements Serializable {
     public String createdBy; // author
     public String totalTime; //total time to run the recipe as a string.
     public boolean isActive; // pause/resume timer execution
+    public int totalRunTimeSeconds;
 
     public ArrayList<Ingredient> ingredients = new ArrayList<Ingredient>();
     public ArrayList<Step> steps = new ArrayList<Step>();

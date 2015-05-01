@@ -21,6 +21,7 @@ public class RunRecipeActivity extends Activity {
         this.recipe = MainActivity.recipes.get((int)id);
 
         ((TextView)findViewById(R.id.RecipeName)).setText(this.recipe.name);
+        ((TextView)findViewById(R.id.timeRemaining)).setText(this.recipe.totalRunTimeSeconds);
     }
 
     public void playPause(View view) {
