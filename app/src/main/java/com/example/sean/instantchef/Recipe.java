@@ -1,6 +1,7 @@
 package com.example.sean.instantchef;
 
-import org.json.JSONArray;
+import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -96,15 +97,27 @@ public class Recipe implements Serializable {
     }
 
     //import a json_string of recipes into the program.
-    public static void importRecipes(String json_string) throws JSONException {
+    public static boolean importRecipes(String json_string) throws JSONException {
         JSONObject json_file = new JSONObject(json_string);
 
+        //there are 2 booleans here because we need to keep track of the local
+        //duplicates, and the function needs to know whether there were any
+        //duplicates in the whole import process (so we can make a toast).
+        boolean any_duplicates = false;
         for (int i = 0; i < json_file.length(); i++) {
+            boolean duplicate = false;
             String json_recipe = json_file.getString("recipe" + i);
             Recipe recipe = Recipe.deserialize(json_recipe);
             //TODO: add recipe to the database.
-            MainActivity.recipes.add(recipe);
+            for (int j = 0; j < MainActivity.recipes.size(); j++) {
+                if (recipe.name.equals(MainActivity.recipes.get(j).name)) {
+                    any_duplicates = true;
+                    duplicate = true;
+                }
+            }
+            if (!duplicate) MainActivity.recipes.add(recipe);
         }
+        return any_duplicates;
     }
 
     //deserializes a JSON string into a recipe object.

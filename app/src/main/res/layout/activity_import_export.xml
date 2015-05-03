@@ -49,12 +49,13 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/export_progressBar"
+            android:id="@+id/exportProgressBar"
             android:layout_marginTop="37dp"
             android:indeterminate="true"
             android:layout_below="@+id/export_button"
             android:layout_alignLeft="@+id/export_button"
-            android:layout_alignStart="@+id/export_button" />
+            android:layout_alignStart="@+id/export_button"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -63,11 +64,12 @@
             android:text="export status text goes here"
             android:id="@+id/export_status_textview"
             android:textColor="#ff212121"
-            android:layout_alignBottom="@+id/export_progressBar"
+            android:layout_alignBottom="@+id/exportProgressBar"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp" />
+            android:layout_marginRight="10dp"
+            android:visibility="invisible" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -109,12 +111,13 @@
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/import_progress_bar"
+            android:id="@+id/importProgressBar"
             android:layout_below="@+id/import_button"
             android:layout_alignLeft="@+id/import_button"
             android:layout_alignStart="@+id/import_button"
             android:layout_marginTop="38dp"
-            android:indeterminate="true" />
+            android:indeterminate="true"
+            android:visibility="invisible" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -122,11 +125,12 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="import status text goes here"
             android:id="@+id/import_status_textview"
-            android:layout_alignBottom="@+id/import_progress_bar"
+            android:layout_alignBottom="@+id/importProgressBar"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"
             android:textColor="#ff212121"
             android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp" />
+            android:layout_marginLeft="10dp"
+            android:visibility="invisible" />
     </RelativeLayout>
 </RelativeLayout>

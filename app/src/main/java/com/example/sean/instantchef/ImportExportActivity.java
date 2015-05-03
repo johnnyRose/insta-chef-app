@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,12 +47,16 @@ public class ImportExportActivity extends ActionBarActivity {
     }
 
     public void import_file(View view) throws JSONException {
+
+        (findViewById(R.id.importProgressBar)).setVisibility(View.VISIBLE);
         //TODO: implement file chooser, maybe.
         //apparently android API has no built-in support for a file chooser. lame.
 
         //we'll use a hardcoded JSON string for now to work out the parsing, see the bottom of this file for the pretty version.
         String json_string = "{\"recipe0\":{\"id\":0,\"description\":\"A simple recipe to test functionality.\",\"name\":\"Sean's Awesome Egg Sammich\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Eggs, whole.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bacon\",\"amount\":\"4 pieces\"},\"ingredient2\":{\"id\":2,\"description\":\"Bread\",\"amount\":\"2 slices\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Using a skillet, cook the pieces of bacon over medium heat until slightly crispy. Set aside.\",\"startTime\":0,\"length\":300},\"step1\":{\"id\":1,\"description\":\"Turn the burner down to medium-low and fry the 2 eggs until over-medium (or desired consistency).\",\"startTime\":300,\"length\":180},\"step2\":{\"id\":2,\"description\":\"Toast your bread, butter while still warm.\",\"startTime\":330,\"length\":180},\"step3\":{\"id\":3,\"description\":\"Assemble your creation.\",\"startTime\":480,\"length\":60}}},\"recipe1\":{\"id\":0,\"description\":\"so good.\",\"name\":\"Grilled Cheese\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Cheese slices.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bread\",\"amount\":\"2\"},\"ingredient2\":{\"id\":2,\"description\":\"Mayo\",\"amount\":\"\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Pre-heat the skillet on medium. Coat 1 side of each piece of bread with mayo, put the cheese slices inside.\",\"startTime\":0,\"length\":80},\"step1\":{\"id\":1,\"description\":\"Fry until golden-brown, mayo side out.\",\"startTime\":80,\"length\":120}}}}";
-        Recipe.importRecipes(json_string);
+        boolean duplicates = Recipe.importRecipes(json_string);
+        if (duplicates) Toast.makeText(this, "Duplicate recipes were not imported.", Toast.LENGTH_LONG).show();
+        (findViewById(R.id.importProgressBar)).setVisibility(View.INVISIBLE);
 
         //go to the main screen after import.
         Intent intent = new Intent(this, MainActivity.class);
@@ -58,6 +64,8 @@ public class ImportExportActivity extends ActionBarActivity {
     }
 
     public void export_file(View view) {
+
+        (findViewById(R.id.exportProgressBar)).setVisibility(View.VISIBLE);
         //TODO: see above.
         String export_string = "";
         for (int i = 0; i < MainActivity.recipes.size(); i++){
@@ -67,6 +75,7 @@ public class ImportExportActivity extends ActionBarActivity {
             }
         }
         Log.d("instant-chef-app", "{" + export_string + "}");
+        (findViewById(R.id.exportProgressBar)).setVisibility(View.INVISIBLE);
     }
 }
 

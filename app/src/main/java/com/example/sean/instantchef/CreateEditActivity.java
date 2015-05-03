@@ -116,6 +116,15 @@ public class CreateEditActivity extends ActionBarActivity {
             return;
         }
 
+        boolean duplicate_name = false;
+        for (int i = 0; i < MainActivity.recipes.size(); i++) {
+            if (given_name.equals(MainActivity.recipes.get(i).name)) duplicate_name = true;
+        }
+        if (duplicate_name) {
+            Toast.makeText(this, "This recipe name has already been taken.", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Recipe recipe;
         if (MainActivity.editing) {
             //copy the original and delete it
