@@ -8,8 +8,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Run Recipe"
-        android:id="@+id/runRecipeView"
+        android:text="Recipe Title Here"
+        android:id="@+id/runRecipeTitleView"
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:textSize="22sp"
@@ -24,45 +24,66 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_below="@+id/runRecipeView">
+        android:layout_below="@+id/runRecipeTitleView"
+        android:id="@+id/recipeDisplay">
 
-        <LinearLayout
-            android:orientation="horizontal"
+
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="fill_parent">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/RecipeName"
-                android:textColor="#ff212121" />
-        </LinearLayout>
+                android:text="Ingredients list, gather before you start:"
+                android:id="@+id/textView11"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:id="@+id/recipeIngredientListView"
+            android:choiceMode="none" />
+
+        <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="fill_parent"
+            android:layout_marginTop="25dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:id="@+id/timeRemaining"
-                android:layout_marginLeft="5dp"
-                android:textColor="#ff212121" />
-        </LinearLayout>
+                android:text="Instructions, total time: xx minutes."
+                android:id="@+id/recipeTotalTimeView"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+        </RelativeLayout>
+
+
+
+        <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:id="@+id/recipeStepListView"
+            android:choiceMode="none" />
     </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Start"
+        android:layout_height="55dp"
+        android:text="Yeah, Let&apos;s Cook!"
         android:id="@+id/playPause"
         android:width="180dp"
         android:height="100dp"
-        android:layout_centerVertical="true"
+        android:onClick="playPause"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:onClick="playPause"/>
+        android:layout_marginBottom="25dp"
+        android:textColor="#ff212121"
+        android:background="#ff455a64" />
 
 </RelativeLayout>

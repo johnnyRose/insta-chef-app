@@ -119,6 +119,7 @@ public class CreateEditActivity extends ActionBarActivity {
         Recipe recipe;
         if (MainActivity.editing) {
             //copy the original and delete it
+            //TODO: look at this.
             recipe = MainActivity.recipes.get(MainActivity.recipe_number);
             //MainActivity.recipes.remove(MainActivity.recipe_number);
             recipe.name = given_name;
