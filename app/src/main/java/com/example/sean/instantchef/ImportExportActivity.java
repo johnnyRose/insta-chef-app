@@ -49,7 +49,7 @@ public class ImportExportActivity extends ActionBarActivity {
         //apparently android API has no built-in support for a file chooser. lame.
 
         //we'll use a hardcoded JSON string for now to work out the parsing, see the bottom of this file for the pretty version.
-        String json_string = "{\"recipe0\":{\"id\":0,\"description\":\"test recipe\",\"name\":\"test recipe3\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"pizza\",\"amount\":\"one\"},\"ingredient1\":{\"id\":1,\"description\":\"pepperoni\",\"amount\":\"16\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"boil\",\"startTime\":0,\"length\":40},\"step1\":{\"id\":1,\"description\":\"boil more\",\"startTime\":30,\"length\":40}}},\"recipe1\":{\"id\":0,\"description\":\"test recipe\",\"name\":\"test recipe4\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"pizza\",\"amount\":\"one\"},\"ingredient1\":{\"id\":1,\"description\":\"pepperoni\",\"amount\":\"16\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"boil\",\"startTime\":0,\"length\":40},\"step1\":{\"id\":1,\"description\":\"boil more\",\"startTime\":30,\"length\":40}}}}";
+        String json_string = "{\"recipe0\":{\"id\":0,\"description\":\"A simple recipe to test functionality.\",\"name\":\"Sean's Awesome Egg Sammich\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Eggs, whole.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bacon\",\"amount\":\"4 pieces\"},\"ingredient2\":{\"id\":2,\"description\":\"Bread\",\"amount\":\"2 slices\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Using a skillet, cook the pieces of bacon over medium heat until slightly crispy. Set aside.\",\"startTime\":0,\"length\":300},\"step1\":{\"id\":1,\"description\":\"Turn the burner down to medium-low and fry the 2 eggs until over-medium (or desired consistency).\",\"startTime\":300,\"length\":180},\"step2\":{\"id\":2,\"description\":\"Toast your bread, butter while still warm.\",\"startTime\":330,\"length\":180},\"step3\":{\"id\":3,\"description\":\"Assemble your creation.\",\"startTime\":480,\"length\":60}}},\"recipe1\":{\"id\":0,\"description\":\"so good.\",\"name\":\"Grilled Cheese\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Cheese slices.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bread\",\"amount\":\"2\"},\"ingredient2\":{\"id\":2,\"description\":\"Mayo\",\"amount\":\"\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Pre-heat the skillet on medium. Coat 1 side of each piece of bread with mayo, put the cheese slices inside.\",\"startTime\":0,\"length\":80},\"step1\":{\"id\":1,\"description\":\"Fry until golden-brown, mayo side out.\",\"startTime\":80,\"length\":120}}}}";
         Recipe.importRecipes(json_string);
 
         //go to the main screen after import.
@@ -75,65 +75,87 @@ public class ImportExportActivity extends ActionBarActivity {
 {
     "recipe0": {
         "id": 0,
-        "description": "test recipe",
-        "name": "test recipe3",
+        "description": "A simple recipe to test functionality.",
+        "name": "Sean's Awesome Egg Sammich",
         "dateCreated": "",
         "ingredients": {
             "ingredient0": {
                 "id": 0,
-                "description": "pizza",
-                "amount": "one"
+                "description": "Eggs, whole.",
+                "amount": "2"
             },
             "ingredient1": {
                 "id": 1,
-                "description": "pepperoni",
-                "amount": "16"
+                "description": "Bacon",
+                "amount": "4 pieces"
+            },
+            "ingredient2": {
+                "id": 2,
+                "description": "Bread",
+                "amount": "2 slices"
             }
         },
         "steps": {
             "step0": {
                 "id": 0,
-                "description": "boil",
+                "description": "Using a skillet, cook the pieces of bacon over medium heat until slightly crispy. Set aside.",
                 "startTime": 0,
-                "length": 40
+                "length": 300
             },
             "step1": {
                 "id": 1,
-                "description": "boil more",
-                "startTime": 30,
-                "length": 40
+                "description": "Turn the burner down to medium-low and fry the 2 eggs until over-medium (or desired consistency).",
+                "startTime": 300,
+                "length": 180
+            },
+            "step2": {
+                "id": 2,
+                "description": "Toast your bread, butter while still warm.",
+                "startTime": 330,
+                "length": 180
+            },
+            "step3": {
+                "id": 3,
+                "description": "Assemble your creation.",
+                "startTime": 480,
+                "length": 60
             }
         }
     },
     "recipe1": {
         "id": 0,
-        "description": "test recipe",
-        "name": "test recipe4",
+        "description": "so good.",
+        "name": "Grilled Cheese",
         "dateCreated": "",
         "ingredients": {
             "ingredient0": {
                 "id": 0,
-                "description": "pizza",
-                "amount": "one"
+                "description": "Cheese slices.",
+                "amount": "2"
             },
             "ingredient1": {
                 "id": 1,
-                "description": "pepperoni",
-                "amount": "16"
+                "description": "Bread",
+                "amount": "2"
+            },
+            "ingredient2": {
+                "id": 2,
+                "description": "Mayo",
+                "amount": ""
             }
         },
         "steps": {
             "step0": {
                 "id": 0,
-                "description": "boil",
+                "description": "Pre-heat the skillet on medium. Coat 1 side of each piece of bread with mayo, put the cheese slices inside.",
                 "startTime": 0,
-                "length": 40
+                "length": 80
             },
             "step1": {
                 "id": 1,
-                "description": "boil more",
-                "startTime": 30,
-                "length": 40
+                "description": "Fry until golden-brown, mayo side out.",
+                "startTime": 80,
+                "length": 120
             }
         }
     }
