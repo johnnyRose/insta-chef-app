@@ -120,7 +120,7 @@ public class RecipeListActivity extends ActionBarActivity {
 
             Recipe recipe = MainActivity.recipes.get(arg0);
             nameView.setText(recipe.name);
-            timeView.setText(recipe.totalTime);
+            timeView.setText(Integer.toString(recipe.totalRunTimeSeconds));
 
             return arg1;
         }

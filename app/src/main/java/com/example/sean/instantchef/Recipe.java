@@ -20,7 +20,6 @@ public class Recipe implements Serializable {
     public String name; // recipe name
     public String dateCreated; // date created
     public String createdBy; // author
-    public String totalTime; //total time to run the recipe as a string.
     public boolean isActive; // pause/resume timer execution
     public int totalRunTimeSeconds;
 
@@ -133,6 +132,19 @@ public class Recipe implements Serializable {
                     json_step.getInt("length"));
             recipe.steps.add(step);
         }
+        Recipe.calculate_total_runtime(recipe);
         return recipe;
+    }
+
+    //calculates the total run time for a passed recipe and stores it.
+    public static void calculate_total_runtime(Recipe recipe) {
+        int maxVal = 0;
+        for (int i = 0; i < recipe.steps.size(); ++i) {
+            int tempVal = recipe.steps.get(i).startTime + recipe.steps.get(i).length;
+            if (tempVal > maxVal) {
+                maxVal = tempVal;
+            }
+        }
+        recipe.totalRunTimeSeconds = maxVal;
     }
 }

@@ -136,16 +136,11 @@ public class CreateEditActivity extends ActionBarActivity {
             recipe.ingredients.add(CreateEditActivity.ingredients.get(i));
         }
         recipe.deleteSteps();
-        int maxVal = 0;
         for (int i = 0; i < steps.size(); ++i) {
-            int tempVal = steps.get(i).startTime + steps.get(i).length;
-            if (tempVal > maxVal) {
-                maxVal = tempVal;
-            }
             recipe.steps.add(CreateEditActivity.steps.get(i));
         }
 
-        recipe.totalRunTimeSeconds = maxVal;
+        Recipe.calculate_total_runtime(recipe);
 
         //delete the ingredients and steps from this class for later
         CreateEditActivity.ingredients = new ArrayList<>();
