@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -19,6 +20,8 @@ public class RunRecipeActivity extends Activity {
     public static Recipe recipe;
     public IngredientAdapter ingredientAdapter;
     public TimerAdapter timerAdapter;
+    private boolean started = false;
+    public LinearLayout stepsDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,24 +40,24 @@ public class RunRecipeActivity extends Activity {
         ingredientAdapter = new IngredientAdapter(this);
         ListView listView1 = (ListView) findViewById(R.id.recipeIngredientListView);
         listView1.setAdapter(ingredientAdapter);
-        /*listView1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: decide what behavior we want when the user clicks an ingredient, if any.
-            }
-        });*/
+
         timerAdapter = new TimerAdapter(this);
         ListView listView2 = (ListView) findViewById(R.id.recipeStepListView);
         listView2.setAdapter(timerAdapter);
-        /*listView2.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: decide what behavior we want when the user clicks a timer, if any.
-            }
-        });*/
+
+        //TODO: populate the stepsDisplay linear layout with the timers.
     }
 
     public void playPause(View view) {
+        if (!started) {
+            //hide the recipeDisplay linear layout and show the stepsDisplay layout instead if this
+            //is the first time the user presses the start/pause button.
+            LinearLayout infoLayout = (LinearLayout) findViewById(R.id.recipeDisplay);
+            infoLayout.setVisibility(View.GONE);
+            stepsDisplay = (LinearLayout) findViewById(R.id.stepDisplay);
+            stepsDisplay.setVisibility(View.VISIBLE);
+            started = true;
+        }
         ((TextView)findViewById(R.id.playPause)).setText(this.recipe.isActive ? "Resume" : "Pause");
         this.recipe.isActive = !this.recipe.isActive;
     }

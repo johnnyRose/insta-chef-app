@@ -72,6 +72,14 @@
             android:choiceMode="none" />
     </LinearLayout>
 
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:layout_below="@+id/runRecipeTitleView"
+        android:id="@+id/stepDisplay"
+        android:visibility="gone"></LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="55dp"
