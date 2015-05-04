@@ -78,7 +78,15 @@
         android:layout_height="400dp"
         android:layout_below="@+id/runRecipeTitleView"
         android:id="@+id/stepDisplay"
-        android:visibility="gone"></LinearLayout>
+        android:visibility="gone">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="Small Text"
+            android:id="@+id/countdownTimerView" />
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"

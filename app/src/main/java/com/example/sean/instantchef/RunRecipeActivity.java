@@ -2,7 +2,9 @@ package com.example.sean.instantchef;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +23,10 @@ public class RunRecipeActivity extends Activity {
     public IngredientAdapter ingredientAdapter;
     public TimerAdapter timerAdapter;
     private boolean started = false;
+    private boolean paused = false;
     public LinearLayout stepsDisplay;
+    public CountDownTimer countDown;
+    int secondsRemaining;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,7 @@ public class RunRecipeActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         long id = extras.getLong("sean_and_john.run_recipe.info");
         RunRecipeActivity.recipe = MainActivity.recipes.get((int)id);
+        secondsRemaining = RunRecipeActivity.recipe.totalRunTimeSeconds;
 
         ((TextView)findViewById(R.id.runRecipeTitleView)).setText(RunRecipeActivity.recipe.name);
         ((TextView)findViewById(R.id.recipeTotalTimeView)).setText("Instructions, total time: "
@@ -57,9 +63,29 @@ public class RunRecipeActivity extends Activity {
             stepsDisplay = (LinearLayout) findViewById(R.id.stepDisplay);
             stepsDisplay.setVisibility(View.VISIBLE);
             started = true;
+            ((TextView)findViewById(R.id.countdownTimerView)).setText("seconds remaining: " + secondsRemaining);
+
+            //start the countdown timer
+            countDown = new CountDownTimer(secondsRemaining * 1000, 1000) {
+
+                public void onTick(long millisUntilFinished) {
+                    secondsRemaining -= 1;
+                    ((TextView)findViewById(R.id.countdownTimerView)).setText("seconds remaining: " + millisUntilFinished / 1000);
+                }
+
+                public void onFinish() {
+                    ((TextView)findViewById(R.id.countdownTimerView)).setText("done!");
+
+                    //go to main menu when finished.
+                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                }
+            }.start();
+        } else {
+            started = false;
+            countDown.cancel();
         }
-        ((TextView)findViewById(R.id.playPause)).setText(this.recipe.isActive ? "Resume" : "Pause");
-        this.recipe.isActive = !this.recipe.isActive;
+        ((TextView)findViewById(R.id.playPause)).setText(RunRecipeActivity.recipe.isActive ? "Resume" : "Pause");
+        RunRecipeActivity.recipe.isActive = !RunRecipeActivity.recipe.isActive;
     }
 
     public class IngredientAdapter extends BaseAdapter {
