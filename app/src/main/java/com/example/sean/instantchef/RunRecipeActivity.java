@@ -37,10 +37,12 @@ public class RunRecipeActivity extends Activity {
         long id = extras.getLong("sean_and_john.run_recipe.info");
         RunRecipeActivity.recipe = MainActivity.recipes.get((int)id);
         secondsRemaining = RunRecipeActivity.recipe.totalRunTimeSeconds;
+        long minutes = secondsRemaining / 60;
+        long seconds = (secondsRemaining - (minutes * 60));
 
         ((TextView)findViewById(R.id.runRecipeTitleView)).setText(RunRecipeActivity.recipe.name);
         ((TextView)findViewById(R.id.recipeTotalTimeView)).setText("Instructions, total time: "
-                + Integer.toString(RunRecipeActivity.recipe.totalRunTimeSeconds / 60) + " minutes.");
+                + minutes + " mins, " + seconds + " secs.");
 
         //set up the adapters
         ingredientAdapter = new IngredientAdapter(this);
@@ -69,8 +71,11 @@ public class RunRecipeActivity extends Activity {
             countDown = new CountDownTimer(secondsRemaining * 1000, 1000) {
 
                 public void onTick(long millisUntilFinished) {
+                    long minutes = millisUntilFinished / 1000 / 60;
+                    long seconds = (millisUntilFinished - (minutes * 1000 * 60)) / 1000;
                     secondsRemaining -= 1;
-                    ((TextView)findViewById(R.id.countdownTimerView)).setText("seconds remaining: " + millisUntilFinished / 1000);
+                    ((TextView)findViewById(R.id.countdownTimerView)).setText("Time until delicious completion: "
+                            + minutes + " mins, " + seconds + " sec.");
                 }
 
                 public void onFinish() {

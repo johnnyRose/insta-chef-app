@@ -13,7 +13,24 @@
         android:layout_gravity="center_horizontal"
         android:layout_margin="5dp"
         android:textColor="#ff212121"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold|italic" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="240dp"
+            android:layout_height="2dp"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:background="#8BC34A"
+            android:id="@+id/linearLayout4" />
+    </RelativeLayout>
 
     <ListView
         android:layout_width="match_parent"
