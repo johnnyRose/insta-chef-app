@@ -50,10 +50,6 @@ public class Recipe implements Serializable {
         this.steps.add(step);
     }
 
-    public void removeIngredients() {
-
-    }
-
     public void togglePause() {
         this.isActive = !this.isActive;
     }
@@ -89,11 +85,15 @@ public class Recipe implements Serializable {
     }
 
     public void deleteIngredients() {
-        this.ingredients = new ArrayList<>();
+        for (int i = 0; i < this.ingredients.size(); i++) {
+            this.ingredients.remove(0);
+        }
     }
 
     public void deleteSteps() {
-        this.steps = new ArrayList<>();
+        for (int i = 0; i < this.steps.size(); i++) {
+            this.steps.remove(0);
+        }
     }
 
     //import a json_string of recipes into the program.

@@ -42,13 +42,11 @@ public class RecipeListActivity extends ActionBarActivity {
                 CreateEditActivity.ingredients = new ArrayList<>();
                 CreateEditActivity.steps = new ArrayList<>();
                 for (int i = 0; i < MainActivity.recipes.get(position).ingredients.size(); i++) {
-                    CreateEditActivity.ingredients.add(MainActivity.recipes.get(position).ingredients.get(position));
+                    CreateEditActivity.ingredients.add(MainActivity.recipes.get(position).ingredients.get(i));
                 }
                 for (int i = 0; i < MainActivity.recipes.get(position).steps.size(); i++) {
-                    CreateEditActivity.steps.add(MainActivity.recipes.get(position).steps.get(position));
+                    CreateEditActivity.steps.add(MainActivity.recipes.get(position).steps.get(i));
                 }
-                //CreateEditActivity.ingredients = MainActivity.recipes.get(position).ingredients;
-                //CreateEditActivity.steps = MainActivity.recipes.get(position).steps;
 
                 Intent intent = new Intent(getBaseContext(), CreateEditActivity.class);
                 MainActivity.editing = true;
@@ -61,7 +59,6 @@ public class RecipeListActivity extends ActionBarActivity {
     }
 
     public void startRecipe(long id) {
-        //TODO: uncomment this after we create the RunRecipe screen/class (might need to rename it).
         Intent intent = new Intent(this, RunRecipeActivity.class);
         intent.putExtra("sean_and_john.run_recipe.info", id);
         startActivity(intent);
@@ -120,7 +117,7 @@ public class RecipeListActivity extends ActionBarActivity {
 
             Recipe recipe = MainActivity.recipes.get(arg0);
             nameView.setText(recipe.name);
-            timeView.setText(Integer.toString(recipe.totalRunTimeSeconds));
+            timeView.setText("Total cooking time: " + Integer.toString(recipe.totalRunTimeSeconds));
 
             return arg1;
         }

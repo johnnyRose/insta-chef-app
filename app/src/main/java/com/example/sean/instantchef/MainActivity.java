@@ -36,9 +36,13 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void go_to_create_edit_recipe(View view) {
-        //new recipe, clear the 2 lists on the next screen.
+        //new recipe, clear the lists/vars on the next screen.
         CreateEditActivity.ingredients = new ArrayList<>();
         CreateEditActivity.steps = new ArrayList<>();
+        CreateEditActivity.new_recipe_name = "";
+        CreateEditActivity.new_recipe_description = "";
+        CreateEditActivity.new_recipe_createdby = "";
+
         editing = false;
 
         Intent intent = new Intent();

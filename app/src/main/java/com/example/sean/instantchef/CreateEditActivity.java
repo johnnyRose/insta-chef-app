@@ -27,6 +27,9 @@ public class CreateEditActivity extends ActionBarActivity {
     public static Recipe current_recipe;
     public static IngredientAdapter ingredientAdapter;
     public static TimerAdapter timerAdapter;
+    public static String new_recipe_name;
+    public static String new_recipe_description;
+    public static String new_recipe_createdby;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,26 +80,36 @@ public class CreateEditActivity extends ActionBarActivity {
             createRecipeTitleView.setText("New Recipe");
 
             TextView nameEditText = (TextView) findViewById(R.id.nameEditText);
-            nameEditText.setText("");
+            nameEditText.setText(CreateEditActivity.new_recipe_name);
 
             TextView descriptionEditText = (TextView) findViewById(R.id.descriptionEditText);
-            descriptionEditText.setText("");
+            descriptionEditText.setText(CreateEditActivity.new_recipe_description);
 
             TextView createdByEditText = (TextView) findViewById(R.id.createdByEditText);
-            createdByEditText.setText("");
+            createdByEditText.setText(CreateEditActivity.new_recipe_createdby);
         }
     }
 
     public void add_ingredient(View view) {
-        //TODO: implement a dialog to add ingredients
+        save_current_details();
         Intent intent = new Intent(this, AddIngredientsActivity.class);
         startActivity(intent);
     }
 
     public void add_step(View view) {
-        //add a timer to the recipe, the first timer will be the main.
+        save_current_details();
         Intent intent = new Intent(this, AddTimersActivity.class);
         startActivity(intent);
+    }
+
+    private void save_current_details() {
+        //save the name, description and createdBy to restore when we get back to this screen.
+        TextView nameEditText = (TextView) findViewById(R.id.nameEditText);
+        CreateEditActivity.new_recipe_name = nameEditText.getText().toString();
+        TextView descriptionEditText = (TextView) findViewById(R.id.descriptionEditText);
+        CreateEditActivity.new_recipe_description = descriptionEditText.getText().toString();
+        TextView createdByEditText = (TextView) findViewById(R.id.createdByEditText);
+        CreateEditActivity.new_recipe_createdby = createdByEditText.getText().toString();
     }
 
     public void save_recipe(View view) {
@@ -116,14 +129,17 @@ public class CreateEditActivity extends ActionBarActivity {
             return;
         }
 
-        boolean duplicate_name = false;
-        for (int i = 0; i < MainActivity.recipes.size(); i++) {
-            if (given_name.equals(MainActivity.recipes.get(i).name)) duplicate_name = true;
+        if (!MainActivity.editing) {
+            boolean duplicate_name = false;
+            for (int i = 0; i < MainActivity.recipes.size(); i++) {
+                if (given_name.equals(MainActivity.recipes.get(i).name)) duplicate_name = true;
+            }
+            if (duplicate_name) {
+                Toast.makeText(this, "This recipe name has already been taken.", Toast.LENGTH_LONG).show();
+                return;
+            }
         }
-        if (duplicate_name) {
-            Toast.makeText(this, "This recipe name has already been taken.", Toast.LENGTH_LONG).show();
-            return;
-        }
+
 
         Recipe recipe;
         if (MainActivity.editing) {

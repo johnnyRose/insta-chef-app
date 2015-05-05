@@ -53,8 +53,8 @@ public class AddTimersActivity extends ActionBarActivity {
         } else {
             Step step = new Step();
             step.description = desc.getText().toString();
-            step.startTime = parseInt(start.getText().toString()); //TODO: type checking. user could enter a string.
-            step.length = parseInt(length.getText().toString());  //TODO: type checking. user could enter a string.
+            step.startTime = parseInt(start.getText().toString());
+            step.length = parseInt(length.getText().toString());
 
             CreateEditActivity.steps.add(step);
             timerAdapter.notifyDataSetChanged();

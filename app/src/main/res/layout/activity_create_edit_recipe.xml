@@ -120,7 +120,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add ingredients..."
+                    android:text="Edit ingredients..."
                     android:id="@+id/addIngredientButton"
                     android:textColor="#ff212121"
                     android:background="#ff455a64"
@@ -135,7 +135,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="127dp"
                 android:id="@+id/ingredientListView"
-                android:layout_marginRight="3dp" />
+                android:layout_marginRight="3dp"
+                android:choiceMode="none" />
         </LinearLayout>
 
         <LinearLayout
@@ -175,7 +176,7 @@
                 <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Add steps..."
+                    android:text="Edit steps..."
                     android:id="@+id/addTimerButton"
                     android:textColor="#ff212121"
                     android:background="#ff455a64"
@@ -190,7 +191,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="128dp"
                 android:id="@+id/timerListView"
-                android:layout_marginRight="3dp" />
+                android:layout_marginRight="3dp"
+                android:choiceMode="none" />
         </LinearLayout>
 
         <RelativeLayout
