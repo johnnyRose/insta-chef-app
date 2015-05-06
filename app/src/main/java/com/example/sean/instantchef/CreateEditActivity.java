@@ -263,7 +263,7 @@ public class CreateEditActivity extends ActionBarActivity {
                 LayoutInflater inflater = (LayoutInflater) CreateEditActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 arg1 = inflater.inflate(R.layout.timer_list_view, arg2, false);
             }
-            TextView descriptionView = (TextView)arg1.findViewById(R.id.descriptionView);
+            TextView descriptionView = (TextView)arg1.findViewById(R.id.runningTimerDescriptionView);
             TextView timeLeftView = (TextView)arg1.findViewById(R.id.timeLeftView);
             Step step = steps.get(arg0);
 

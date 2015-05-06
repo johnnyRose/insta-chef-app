@@ -14,8 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
 import static java.lang.Integer.parseInt;
 
 /**
@@ -113,7 +111,7 @@ public class AddTimersActivity extends ActionBarActivity {
                 LayoutInflater inflater = (LayoutInflater) AddTimersActivity.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 arg1 = inflater.inflate(R.layout.timer_list_view, arg2, false);
             }
-            TextView descriptionView = (TextView)arg1.findViewById(R.id.descriptionView);
+            TextView descriptionView = (TextView)arg1.findViewById(R.id.runningTimerDescriptionView);
             TextView timeLeftView = (TextView)arg1.findViewById(R.id.timeLeftView);
             Step step = CreateEditActivity.steps.get(arg0);
 

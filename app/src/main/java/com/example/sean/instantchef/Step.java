@@ -14,12 +14,14 @@ public class Step implements Serializable {
     public String description; // short description to be shown when timer starts, "add veggies", "reduce heat to simmer"
     public int startTime; // At what point in the recipe's life should this timer begin?
     public int length;
+    public boolean running;
 
     public Step(int id, String description, int startTime, int length) {
         this.id = id;
         this.description = description;
         this.startTime = startTime;
         this.length = length;
+        this.running = false;
     }
 
     public Step() {

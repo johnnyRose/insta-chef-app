@@ -17,7 +17,6 @@ public class Recipe implements Serializable {
 
     public int id; // database integration
     public String description; // description of recipe
-    public String imagePath; // path to image on web
     public String name; // recipe name
     public String dateCreated; // date created
     public String createdBy; // author
@@ -42,6 +41,7 @@ public class Recipe implements Serializable {
         this.id = recipe_index++;
     }
 
+    /*
     public void start() {
         this.isActive = true;
     }
@@ -60,7 +60,7 @@ public class Recipe implements Serializable {
 
     public void removeIngredient(Ingredient ingredient) {
         this.ingredients.remove(ingredient);
-    }
+    }*/
 
     public String serialize() {
         String steps_string = "{";
@@ -126,7 +126,6 @@ public class Recipe implements Serializable {
         Recipe recipe = new Recipe(json_recipe.getString("description"), json_recipe.getString("name"),
                 json_recipe.getString("dateCreated"), "");
 
-        //JSONObject json_ingredients = new JSONObject(json_file.getString("ingredients"));
         JSONObject json_ingredients = json_recipe.getJSONObject("ingredients");
         for (int j = 0; j < json_ingredients.length(); j++) {
             JSONObject json_ingredient = json_ingredients.getJSONObject("ingredient" + j);
