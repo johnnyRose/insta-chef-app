@@ -9,7 +9,7 @@
         android:layout_height="fill_parent"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Timer Start Description"
-        android:id="@+id/descriptionView"
+        android:id="@+id/timerDescriptionView"
         android:gravity="center"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
@@ -21,6 +21,6 @@
         android:text="Timer length"
         android:id="@+id/timeLeftView"
         android:gravity="center"
-        android:layout_below="@+id/descriptionView"
+        android:layout_below="@+id/timerDescriptionView"
         android:layout_centerHorizontal="true" />
 </RelativeLayout>

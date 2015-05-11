@@ -41,6 +41,7 @@ public class Recipe implements Serializable {
         this.id = recipe_index++;
     }
 
+    /*
     public void start() {
         this.isActive = true;
     }
@@ -59,7 +60,7 @@ public class Recipe implements Serializable {
 
     public void removeIngredient(Ingredient ingredient) {
         this.ingredients.remove(ingredient);
-    }
+    }*/
 
     public String serialize() {
         String steps_string = "{";
