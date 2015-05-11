@@ -104,32 +104,31 @@ public class RunRecipeActivity extends Activity {
             countDown = new CountDownTimer(secondsRemaining * 1000, 1000) {
                 //int index = 0;
                 public void onTick(long millisUntilFinished) {
-                    long minutes = millisUntilFinished / 1000 / 60;
-                    long seconds = (millisUntilFinished - (minutes * 1000 * 60)) / 1000;
-                    secondsRemaining -= 1;
-                    ((TextView)findViewById(R.id.countdownTimerView)).setText("Time until delicious completion: "
-                            + minutes + " mins, " + seconds + " sec.");
+                    if (RunRecipeActivity.recipe.isActive) {
+                        long minutes = millisUntilFinished / 1000 / 60;
+                        long seconds = (millisUntilFinished - (minutes * 1000 * 60)) / 1000;
+                        secondsRemaining -= 1;
+                        ((TextView)findViewById(R.id.countdownTimerView)).setText("Time until delicious completion: "
+                                + minutes + " mins, " + seconds + " sec.");
 
-                    for (int i = 0; i < recipe.steps.size(); i++) {
-                        //if the timer start is after or = to current time, start the timer & add to the list for display.
-                        if ((recipe.steps.get(i).startTime <= timeElapsed) &&
-                                (!recipe.steps.get(i).running)) {
-                            recipe.steps.get(i).running = true;
-                            steps.add(recipe.steps.get(i));
-                            CountDownTimer newTimer = create_new_step_timer(i, recipe.steps.get(i).length * 1000, 1000).start();
-                            timers.add(newTimer);
-                            //index++;
+                        for (int i = 0; i < recipe.steps.size(); i++) {
+                            //if the timer start is after or = to current time, start the timer & add to the list for display.
+                            if ((recipe.steps.get(i).startTime <= timeElapsed) &&
+                                    (!recipe.steps.get(i).running)) {
+                                recipe.steps.get(i).running = true;
+                                steps.add(recipe.steps.get(i));
+                                CountDownTimer newTimer = create_new_step_timer(i, recipe.steps.get(i).length * 1000, 1000).start();
+                                timers.add(newTimer);
+                            }
                         }
-                    }
 
-                    runningTimerAdapter.notifyDataSetChanged();
-                    timeElapsed += 1;
+                        runningTimerAdapter.notifyDataSetChanged();
+                        timeElapsed += 1;
+                    }
                 }
 
                 public void onFinish() {
                     ((TextView)findViewById(R.id.countdownTimerView)).setText("done!");
-
-                    //go to main menu when finished.
                     startActivity(new Intent(getBaseContext(), MainActivity.class));
                 }
             }.start();
@@ -143,38 +142,32 @@ public class RunRecipeActivity extends Activity {
     }
 
     private CountDownTimer create_new_step_timer(int index, int length, int interval) {
-        final int i = index;
-        //System.out.println("i was " + i);
+        final int ind = index;
+
+        for (int i = 0; i < steps.size(); i++) {
+            steps.get(i).index = i;
+        }
+
         return new CountDownTimer(length, interval) {
+
             @Override
             public void onTick(long millisUntilFinished) {
-                recipe.steps.get(i).secondsLeft -= 1;
-
-                for (int i = 0; i < steps.size(); i++) {
-                    steps.get(i).index = i;
+                if (RunRecipeActivity.recipe.isActive) {
+                    recipe.steps.get(ind).secondsLeft -= 1;
                 }
             }
 
             @Override
             public void onFinish() {
-
-                steps.remove(i);
-
-                /*for (int i = 0; i < steps.size(); i++) {
-                    System.out.println("Indices before correction: " + steps.get(i).index);
+                for (int j = 0; j < recipe.steps.size(); ++j) {
+                    if (recipe.steps.get(j).index == ind) {
+                        steps.remove(j);
+                        runningTimerAdapter.notifyDataSetChanged();
+                        break;
+                    }
                 }
-
-                //update all the indices.
-                for (int i = 0; i < steps.size(); i++) {
-                    steps.get(i).index = i;
-                }
-
-                for (int i = 0; i < steps.size(); i++) {
-                    System.out.println("Indices after correction: " + steps.get(i).index);
-                }*/
             }
         };
-
     }
 
     public class IngredientAdapter extends BaseAdapter {
