@@ -45,6 +45,7 @@ public class RunRecipeActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         long id = extras.getLong("sean_and_john.run_recipe.info");
         RunRecipeActivity.recipe = MainActivity.recipes.get((int) id);
+        //RunRecipeActivity.recipe.isActive = true;
         secondsRemaining = RunRecipeActivity.recipe.totalRunTimeSeconds;
         long minutes = secondsRemaining / 60;
         long seconds = (secondsRemaining - (minutes * 60));
@@ -58,6 +59,19 @@ public class RunRecipeActivity extends Activity {
         ((TextView)findViewById(R.id.recipeTotalTimeView)).setText("Instructions, total time: "
                 + minutes + " mins, " + seconds + " secs.");
 
+        //reset all the lists in case this isn't the first time we've run it.
+        for (int i = 0; i < recipe.steps.size(); i++) {
+            recipe.steps.get(i).secondsLeft = recipe.steps.get(i).length;
+        }
+        for (int i = 0; i < steps.size(); i++) {
+            steps.remove(0);
+        }
+        timers = new ArrayList<>();
+        /*for (int i = 0; i < timers.size(); i++) {
+            timers.get(i).timer.cancel();
+            timers.remove(0);
+        }*/
+
         //set up the adapters
         ingredientAdapter = new IngredientAdapter(this);
         ListView listView1 = (ListView) findViewById(R.id.recipeIngredientListView);
@@ -70,17 +84,6 @@ public class RunRecipeActivity extends Activity {
         runningTimerAdapter = new ActiveTimerAdapter(this);
         ListView listView3 = (ListView) findViewById(R.id.runningStepsListView);
         listView3.setAdapter(runningTimerAdapter);
-
-        //reset all the lists in case this isn't the first time we've run it.
-        for (int i = 0; i < recipe.steps.size(); i++) {
-            recipe.steps.get(i).secondsLeft = recipe.steps.get(i).length;
-        }
-        for (int i = 0; i < steps.size(); i++) {
-            steps.remove(0);
-        }
-        for (int i = 0; i < timers.size(); i++) {
-            timers.remove(0);
-        }
     }
 
     public void playPause(View view) {
@@ -107,6 +110,7 @@ public class RunRecipeActivity extends Activity {
                     if (RunRecipeActivity.recipe.isActive) {
                         long minutes = millisUntilFinished / 1000 / 60;
                         long seconds = (millisUntilFinished - (minutes * 1000 * 60)) / 1000;
+                        seconds++;
                         secondsRemaining -= 1;
                         ((TextView) findViewById(R.id.countdownTimerView)).setText("Time until delicious completion: "
                                 + minutes + " mins, " + seconds + " sec.");
@@ -154,10 +158,8 @@ public class RunRecipeActivity extends Activity {
 
             @Override
             public void onTick(long millisUntilFinished) {
-                if (RunRecipeActivity.recipe.isActive) {
-                    int stepIndex = timers.get(ind).stepIndex;
-                    steps.get(stepIndex).secondsLeft -= 1;
-                }
+                int stepIndex = timers.get(ind).stepIndex;
+                steps.get(stepIndex).secondsLeft -= 1;
             }
 
             @Override
