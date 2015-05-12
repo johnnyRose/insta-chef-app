@@ -59,8 +59,17 @@ public class RecipeListActivity extends ActionBarActivity {
     }
 
     public void startRecipe(long id) {
+        for (int i = 0; i < RunRecipeActivity.timers.size(); i++) {
+            RunRecipeActivity.timers.get(i).timer.cancel();
+        }
+        for (int i = 0; i < RunRecipeActivity.steps.size(); i++) {
+            RunRecipeActivity.steps.remove(i);
+        }
+
+        //RunRecipeActivity.recipe = MainActivity.recipes.get((int) id);
         Intent intent = new Intent(this, RunRecipeActivity.class);
         intent.putExtra("sean_and_john.run_recipe.info", id);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
         startActivity(intent);
     }
 

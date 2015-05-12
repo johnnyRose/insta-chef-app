@@ -1,7 +1,5 @@
 package com.example.sean.instantchef;
 
-import android.widget.Toast;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,27 +38,6 @@ public class Recipe implements Serializable {
         this.ingredients = new ArrayList<Ingredient>();
         this.id = recipe_index++;
     }
-
-    /*
-    public void start() {
-        this.isActive = true;
-    }
-
-    public void addStep(Step step) {
-        this.steps.add(step);
-    }
-
-    public void togglePause() {
-        this.isActive = !this.isActive;
-    }
-
-    public void addIngredient(Ingredient ingredient) {
-        this.ingredients.add(ingredient);
-    }
-
-    public void removeIngredient(Ingredient ingredient) {
-        this.ingredients.remove(ingredient);
-    }*/
 
     public String serialize() {
         String steps_string = "{";
