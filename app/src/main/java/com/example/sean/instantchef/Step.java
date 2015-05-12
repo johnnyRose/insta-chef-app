@@ -20,6 +20,7 @@ public class Step implements Serializable {
     public int secondsLeft;
     public int index;
     public CountDownTimer timer;
+    public int percentDone;
 
     public Step(int id, String description, int startTime, int length) {
         this.id = id;

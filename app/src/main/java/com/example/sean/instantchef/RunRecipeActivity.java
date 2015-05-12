@@ -28,7 +28,7 @@ public class RunRecipeActivity extends Activity {
     public ActiveTimerAdapter runningTimerAdapter;
     private boolean started;
     public LinearLayout stepsDisplay;
-    public CountDownTimer countDown;
+    public static CountDownTimer countDown;
     public int secondsRemaining;
     int timeElapsed;
     public static ArrayList<Step> steps = new ArrayList<>();
@@ -45,7 +45,6 @@ public class RunRecipeActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         long id = extras.getLong("sean_and_john.run_recipe.info");
         RunRecipeActivity.recipe = MainActivity.recipes.get((int) id);
-        //RunRecipeActivity.recipe.isActive = true;
         secondsRemaining = RunRecipeActivity.recipe.totalRunTimeSeconds;
         long minutes = secondsRemaining / 60;
         long seconds = (secondsRemaining - (minutes * 60));
@@ -62,15 +61,13 @@ public class RunRecipeActivity extends Activity {
         //reset all the lists in case this isn't the first time we've run it.
         for (int i = 0; i < recipe.steps.size(); i++) {
             recipe.steps.get(i).secondsLeft = recipe.steps.get(i).length;
+            recipe.steps.get(i).percentDone = 0;
         }
         for (int i = 0; i < steps.size(); i++) {
             steps.remove(0);
         }
+
         timers = new ArrayList<>();
-        /*for (int i = 0; i < timers.size(); i++) {
-            timers.get(i).timer.cancel();
-            timers.remove(0);
-        }*/
 
         //set up the adapters
         ingredientAdapter = new IngredientAdapter(this);
@@ -87,58 +84,55 @@ public class RunRecipeActivity extends Activity {
     }
 
     public void playPause(View view) {
-        //if (!started) {
 
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-            //hide the recipeDisplay linear layout and show the stepsDisplay layout instead if this
-            //is the first time the user presses the start/pause button.
-            LinearLayout infoLayout = (LinearLayout) findViewById(R.id.recipeDisplay);
-            infoLayout.setVisibility(View.GONE);
-            stepsDisplay = (LinearLayout) findViewById(R.id.stepDisplay);
-            stepsDisplay.setVisibility(View.VISIBLE);
-            started = true;
-            ((TextView) findViewById(R.id.countdownTimerView)).setText("seconds remaining: " + secondsRemaining);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        //hide the recipeDisplay linear layout and show the stepsDisplay layout instead if this
+        //is the first time the user presses the start/pause button.
+        LinearLayout infoLayout = (LinearLayout) findViewById(R.id.recipeDisplay);
+        infoLayout.setVisibility(View.GONE);
+        stepsDisplay = (LinearLayout) findViewById(R.id.stepDisplay);
+        stepsDisplay.setVisibility(View.VISIBLE);
+        started = true;
+        ((TextView) findViewById(R.id.countdownTimerView)).setText("seconds remaining: " + secondsRemaining);
 
-            //reset all timers
-            for (int i = 0; i < recipe.steps.size(); i++) {
-                recipe.steps.get(i).running = false;
+        //reset all timers
+        for (int i = 0; i < recipe.steps.size(); i++) {
+            recipe.steps.get(i).running = false;
+        }
+
+        //start the countdown timer
+        countDown = new CountDownTimer(secondsRemaining * 1000, 1000) {
+            public void onTick(long millisUntilFinished) {
+                if (RunRecipeActivity.recipe.isActive) {
+                    long minutes = millisUntilFinished / 1000 / 60;
+                    long seconds = (millisUntilFinished - (minutes * 1000 * 60)) / 1000;
+                    seconds++;
+                    secondsRemaining -= 1;
+                    ((TextView) findViewById(R.id.countdownTimerView)).setText("Time until delicious completion: "
+                            + minutes + " mins, " + seconds + " sec.");
+
+                    for (int i = 0; i < recipe.steps.size(); i++) {
+                        //if the timer start is after or = to current time, start the timer & add to the list for display.
+                        if ((recipe.steps.get(i).startTime <= timeElapsed) &&
+                                (!recipe.steps.get(i).running)) {
+                            recipe.steps.get(i).running = true;
+                            steps.add(recipe.steps.get(i));
+                            CountDownTimer newTimer = create_new_step_timer(RunRecipeActivity.timerIndex, recipe.steps.get(i).length * 1000, 1000).start();
+                            timers.add(new CounterWrapper(RunRecipeActivity.stepIndex, RunRecipeActivity.timerIndex, newTimer));
+                            RunRecipeActivity.timerIndex++;
+                            RunRecipeActivity.stepIndex++;
+                        }
+                    }
+                    runningTimerAdapter.notifyDataSetChanged();
+                    timeElapsed += 1;
+                }
             }
 
-            //start the countdown timer
-            countDown = new CountDownTimer(secondsRemaining * 1000, 1000) {
-                public void onTick(long millisUntilFinished) {
-                    if (RunRecipeActivity.recipe.isActive) {
-                        long minutes = millisUntilFinished / 1000 / 60;
-                        long seconds = (millisUntilFinished - (minutes * 1000 * 60)) / 1000;
-                        seconds++;
-                        secondsRemaining -= 1;
-                        ((TextView) findViewById(R.id.countdownTimerView)).setText("Time until delicious completion: "
-                                + minutes + " mins, " + seconds + " sec.");
+            public void onFinish() {
+                done = true;
+            }
+        }.start();
 
-                        for (int i = 0; i < recipe.steps.size(); i++) {
-                            //if the timer start is after or = to current time, start the timer & add to the list for display.
-                            if ((recipe.steps.get(i).startTime <= timeElapsed) &&
-                                    (!recipe.steps.get(i).running)) {
-                                recipe.steps.get(i).running = true;
-                                steps.add(recipe.steps.get(i));
-                                CountDownTimer newTimer = create_new_step_timer(RunRecipeActivity.timerIndex, recipe.steps.get(i).length * 1000, 1000).start();
-                                timers.add(new CounterWrapper(RunRecipeActivity.stepIndex, RunRecipeActivity.timerIndex, newTimer));
-                                RunRecipeActivity.timerIndex++;
-                                RunRecipeActivity.stepIndex++;
-                            }
-                        }
-
-                        runningTimerAdapter.notifyDataSetChanged();
-                        timeElapsed += 1;
-                    }
-                }
-
-                public void onFinish() {
-                    done = true;
-                }
-            }.start();
-        //}
-        //((TextView)findViewById(R.id.playPause)).setText(RunRecipeActivity.recipe.isActive ? "Resume" : "Pause");
         findViewById(R.id.playPause).setVisibility(View.GONE);
         RunRecipeActivity.recipe.isActive = !RunRecipeActivity.recipe.isActive;
     }
@@ -150,26 +144,20 @@ public class RunRecipeActivity extends Activity {
             steps.get(i).index = i;
         }
 
-        System.out.println("Timer created, RunRecipeActivity.timerIndex = " + RunRecipeActivity.timerIndex);
-        System.out.println("Timer created, RunRecipeActivity.stepIndex = " + RunRecipeActivity.stepIndex);
-        System.out.println("ind = " + ind);
-
         return new CountDownTimer(length, interval) {
 
             @Override
             public void onTick(long millisUntilFinished) {
                 int stepIndex = timers.get(ind).stepIndex;
                 steps.get(stepIndex).secondsLeft -= 1;
+
+                //update the progressbar percentage.
+                timers.get(ind).timeElapsed += 1;
+                steps.get(stepIndex).percentDone = (int) (((float) timers.get(ind).timeElapsed / steps.get(stepIndex).length) * 100);
             }
 
             @Override
             public void onFinish() {
-
-                System.out.println("-------------------------------------");
-                System.out.println("timer destroying, before updates:");
-                for (int i = 0; i < timers.size(); i++) {
-                    System.out.println("timer" + i + ": stepIndex = " + timers.get(i).stepIndex + ", ind = " + ind);
-                }
 
                 //decrement index so that if there are timers added after this one
                 //expires, they'll have a correct index.
@@ -177,22 +165,13 @@ public class RunRecipeActivity extends Activity {
                 steps.remove(timers.get(ind).stepIndex);
 
                 //decrement all the step indices so when we delete the expiring
-                //step everything points to its proper step.
-                //for (int i = ind + 1; i < timers.size(); i++) {
+                //step, everything else points to its proper step.
                 for (int i = ind; i < timers.size(); i++) {
                     timers.get(i).stepIndex--;
                 }
 
-                runningTimerAdapter.notifyDataSetChanged();
-
-                System.out.println("timer destroying, after updates:");
-                for (int i = 0; i < timers.size(); i++) {
-                    System.out.println("timer" + i + ": stepIndex = " + timers.get(i).stepIndex + ", ind = " + ind);
-                }
-                System.out.println("-------------------------------------");
-
+                //if 'done' is true, it means the main timer finished and we need to clean up.
                 if (done) {
-
                     for (int i = 0; i < steps.size(); i++) {
                         steps.get(i).timer.cancel();
                     }
@@ -200,7 +179,6 @@ public class RunRecipeActivity extends Activity {
                     findViewById(R.id.playPause).setVisibility(View.VISIBLE);
                     RunRecipeActivity.recipe.isActive = false;
                     ((TextView)findViewById(R.id.countdownTimerView)).setText("done!");
-                    startActivity(new Intent(getBaseContext(), MainActivity.class));
                     finish();
                 }
             }
@@ -309,14 +287,13 @@ public class RunRecipeActivity extends Activity {
             }
             TextView descriptionView = (TextView)arg1.findViewById(R.id.runningTimerDescriptionView);
             TextView timeLeftView = (TextView)arg1.findViewById(R.id.runtimeLeftView);
-
             ProgressBar progress = (ProgressBar)arg1.findViewById(R.id.stepProgressBar);
 
             Step step = steps.get(arg0);
 
             descriptionView.setText(step.description);
             timeLeftView.setText(step.secondsLeft + " seconds");
-            progress.setProgress(50);
+            progress.setProgress(step.percentDone);
 
             return arg1;
         }
@@ -325,12 +302,14 @@ public class RunRecipeActivity extends Activity {
     public class CounterWrapper {
         public int stepIndex;
         public int timerIndex;
+        public int timeElapsed;
         public CountDownTimer timer;
 
         public CounterWrapper (int stepIndex, int timerIndex, CountDownTimer timer) {
             this.stepIndex = stepIndex;
             this.timerIndex = timerIndex;
             this.timer = timer;
+            this.timeElapsed = 0;
         }
     }
 }

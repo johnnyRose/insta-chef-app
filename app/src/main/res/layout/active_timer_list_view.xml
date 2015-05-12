@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:orientation="vertical" android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="10dp">
 
     <TextView
         android:layout_width="fill_parent"
@@ -9,7 +10,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Description Goes Here"
         android:id="@+id/runningTimerDescriptionView"
-        android:gravity="center"/>
+        android:gravity="left" />
 
     <TextView
         android:layout_width="fill_parent"
@@ -17,7 +18,7 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Time left: "
         android:id="@+id/runtimeLeftView"
-        android:gravity="center"/>
+        android:gravity="left" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"

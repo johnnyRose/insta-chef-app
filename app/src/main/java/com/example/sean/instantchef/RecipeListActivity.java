@@ -33,7 +33,6 @@ public class RecipeListActivity extends ActionBarActivity {
                 startRecipe(id);
             }
         });
-        //myAdapter.notifyDataSetChanged();
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
@@ -66,7 +65,10 @@ public class RecipeListActivity extends ActionBarActivity {
             RunRecipeActivity.steps.remove(i);
         }
 
-        //RunRecipeActivity.recipe = MainActivity.recipes.get((int) id);
+        if (RunRecipeActivity.countDown != null) {
+            RunRecipeActivity.countDown.cancel();
+        }
+
         Intent intent = new Intent(this, RunRecipeActivity.class);
         intent.putExtra("sean_and_john.run_recipe.info", id);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -125,6 +127,7 @@ public class RecipeListActivity extends ActionBarActivity {
             TextView timeView = (TextView)arg1.findViewById(R.id.timeView);
 
             Recipe recipe = MainActivity.recipes.get(arg0);
+
             nameView.setText(recipe.name);
             timeView.setText("Total cooking time: " + Integer.toString(recipe.totalRunTimeSeconds));
 
