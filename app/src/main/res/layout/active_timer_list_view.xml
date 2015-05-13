@@ -17,8 +17,7 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Time left: "
-        android:id="@+id/runtimeLeftView"
-        android:gravity="left" />
+        android:id="@+id/runtimeLeftView" />
 
     <ProgressBar
         style="?android:attr/progressBarStyleHorizontal"

@@ -53,7 +53,7 @@ public class ImportExportActivity extends ActionBarActivity {
         //apparently android API has no built-in support for a file chooser. lame.
 
         //we'll use a hardcoded JSON string for now to work out the parsing, see the bottom of this file for the pretty version.
-        String json_string = "{\"recipe0\":{\"id\":0,\"description\":\"A simple recipe to test functionality.\",\"name\":\"Sean's Awesome Egg Sammich\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Eggs, whole.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bacon\",\"amount\":\"4 pieces\"},\"ingredient2\":{\"id\":2,\"description\":\"Bread\",\"amount\":\"2 slices\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Using a skillet, cook the pieces of bacon over medium heat until slightly crispy. Set aside.\",\"startTime\":0,\"length\":300},\"step1\":{\"id\":1,\"description\":\"Turn the burner down to medium-low and fry the 2 eggs until over-medium (or desired consistency).\",\"startTime\":300,\"length\":180},\"step2\":{\"id\":2,\"description\":\"Toast your bread, butter while still warm.\",\"startTime\":330,\"length\":180},\"step3\":{\"id\":3,\"description\":\"Assemble your creation.\",\"startTime\":480,\"length\":60}}},\"recipe1\":{\"id\":1,\"description\":\"so good.\",\"name\":\"Grilled Cheese\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Cheese slices.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bread\",\"amount\":\"2\"},\"ingredient2\":{\"id\":2,\"description\":\"Mayo\",\"amount\":\"\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Pre-heat the skillet on medium. Coat 1 side of each piece of bread with mayo, put the cheese slices inside.\",\"startTime\":0,\"length\":80},\"step1\":{\"id\":1,\"description\":\"Fry until golden-brown, mayo side out.\",\"startTime\":80,\"length\":120}}},\"recipe2\":{\"id\":2,\"description\":\"so good.\",\"name\":\"Test Recipe\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Cheese slices.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bread\",\"amount\":\"2\"},\"ingredient2\":{\"id\":2,\"description\":\"Mayo\",\"amount\":\"\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Do stuff\",\"startTime\":0,\"length\":10},\"step1\":{\"id\":1,\"description\":\"Do different stuff.\",\"startTime\":5,\"length\":25},\"step2\":{\"id\":2,\"description\":\"Just wing it, idk.\",\"startTime\":12,\"length\":15},\"step3\":{\"id\":3,\"description\":\"Random chopping with a knife.\",\"startTime\":2,\"length\":5}}},\"recipe3\":{\"id\":3,\"description\":\"\",\"name\":\"Test 2\",\"dateCreated\":\"Mon May 11 21:49:58 CDT 2015\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"thing\",\"amount\":\"\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"stuff\",\"startTime\":0,\"length\":3},\"step1\":{\"id\":0,\"description\":\"more stuff\",\"startTime\":5,\"length\":5}}}}";
+        String json_string = "{\"recipe0\":{\"id\":0,\"description\":\"A simple recipe to test functionality.\",\"name\":\"Sean's Awesome Egg Sammich\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Eggs, whole.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bacon\",\"amount\":\"4 pieces\"},\"ingredient2\":{\"id\":2,\"description\":\"Bread\",\"amount\":\"2 slices\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Using a skillet, cook the pieces of bacon over medium heat until slightly crispy. Set aside.\",\"startTime\":0,\"length\":300},\"step1\":{\"id\":1,\"description\":\"Turn the burner down to medium-low and fry the 2 eggs until over-medium (or desired consistency).\",\"startTime\":300,\"length\":180},\"step2\":{\"id\":2,\"description\":\"Toast your bread, butter while still warm.\",\"startTime\":330,\"length\":180},\"step3\":{\"id\":3,\"description\":\"Assemble your creation.\",\"startTime\":480,\"length\":60}}},\"recipe1\":{\"id\":0,\"description\":\"so good.\",\"name\":\"Grilled Cheese\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Cheese slices.\",\"amount\":\"2\"},\"ingredient1\":{\"id\":1,\"description\":\"Bread\",\"amount\":\"2\"},\"ingredient2\":{\"id\":2,\"description\":\"Mayo\",\"amount\":\"\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Pre-heat the skillet on medium. Coat 1 side of each piece of bread with mayo, put the cheese slices inside.\",\"startTime\":0,\"length\":80},\"step1\":{\"id\":1,\"description\":\"Fry until golden-brown, mayo side out.\",\"startTime\":80,\"length\":120}}},\"recipe2\":{\"id\":0,\"description\":\"so good.\",\"name\":\"Pizza\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Frozen pizza.\",\"amount\":\"1 pizza\"},\"ingredient1\":{\"id\":1,\"description\":\"Cooler ranch doritos.\",\"amount\":\"1 partially eaten bag.\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Turn on the oven.\",\"startTime\":0,\"length\":10},\"step1\":{\"id\":1,\"description\":\"Turn the oven off before you burn the house down.\",\"startTime\":5,\"length\":25},\"step2\":{\"id\":2,\"description\":\"Eat an entire bag of doritos.\",\"startTime\":12,\"length\":15},\"step3\":{\"id\":3,\"description\":\"Remember you're way too hungry to wait for a pizza to cook.\",\"startTime\":2,\"length\":5}}},\"recipe3\":{\"id\":0,\"description\":\"also good.\",\"name\":\"Quiche\",\"dateCreated\":\"\",\"ingredients\":{\"ingredient0\":{\"id\":0,\"description\":\"Hash browns.\",\"amount\":\"2 cups\"},\"ingredient1\":{\"id\":1,\"description\":\"Butter\",\"amount\":\"2 tbsp\"},\"ingredient2\":{\"id\":2,\"description\":\"Eggs\",\"amount\":\"3 large\"},\"ingredient3\":{\"id\":2,\"description\":\"Leftover whatever.\",\"amount\":\"\"},\"ingredient4\":{\"id\":2,\"description\":\"Cheese.\",\"amount\":\"lots\"}},\"steps\":{\"step0\":{\"id\":0,\"description\":\"Preheat oven to 450 degrees.\",\"startTime\":0,\"length\":10},\"step1\":{\"id\":1,\"description\":\"Throw your entire cabinets' contents into a pan and bake for 50 minutes.\",\"startTime\":5,\"length\":20},\"step2\":{\"id\":2,\"description\":\"Ask yourself 'Why the heck is it spelled quiche?'.\",\"startTime\":20,\"length\":10},\"step3\":{\"id\":3,\"description\":\"Suddenly realize you're actually making quiche, throw it out and order pizza.\",\"startTime\":27,\"length\":10}}}}";
         boolean duplicates = Recipe.importRecipes(json_string);
         if (duplicates) Toast.makeText(this, "Duplicate recipes were not imported.", Toast.LENGTH_LONG).show();
         (findViewById(R.id.importProgressBar)).setVisibility(View.INVISIBLE);
@@ -176,44 +176,98 @@ public class ImportExportActivity extends ActionBarActivity {
         "ingredients": {
             "ingredient0": {
                 "id": 0,
-                "description": "Cheese slices.",
+                "description": "Frozen pizza.",
                 "amount": "2"
             },
             "ingredient1": {
                 "id": 1,
-                "description": "Bread",
+                "description": "Cooler ranch doritos.",
                 "amount": "2"
-            },
-            "ingredient2": {
-                "id": 2,
-                "description": "Mayo",
-                "amount": ""
             }
         },
         "steps": {
             "step0": {
                 "id": 0,
-                "description": "Do stuff",
+                "description": "Turn on the oven.",
                 "startTime": 0,
                 "length": 10
             },
             "step1": {
                 "id": 1,
-                "description": "Do different stuff.",
+                "description": "Turn the oven off before you burn the house down.",
                 "startTime": 5,
                 "length": 25
             },
             "step2": {
                 "id": 2,
-                "description": "Just wing it, idk.",
+                "description": "Eat an entire bag of doritos.",
                 "startTime": 12,
                 "length": 15
             },
             "step3": {
                 "id": 3,
-                "description": "Random chopping with a knife.",
+                "description": "Remember you're way too hungry to wait for a pizza to cook.",
                 "startTime": 2,
                 "length": 5
+            }
+        }
+    },
+    "recipe3": {
+        "id": 0,
+        "description": "also good.",
+        "name": "Quiche",
+        "dateCreated": "",
+        "ingredients": {
+            "ingredient0": {
+                "id": 0,
+                "description": "Hash browns.",
+                "amount": "2 cups"
+            },
+            "ingredient1": {
+                "id": 1,
+                "description": "Butter",
+                "amount": "2 tbsp"
+            },
+            "ingredient2": {
+                "id": 2,
+                "description": "Eggs",
+                "amount": "3 large"
+            },
+            "ingredient3": {
+                "id": 2,
+                "description": "Leftover whatever.",
+                "amount": ""
+            },
+            "ingredient4": {
+                "id": 2,
+                "description": "Cheese.",
+                "amount": "lots"
+            }
+        },
+        "steps": {
+            "step0": {
+                "id": 0,
+                "description": "Preheat oven to 450 degrees.",
+                "startTime": 0,
+                "length": 10
+            },
+            "step1": {
+                "id": 1,
+                "description": "Throw your entire cabinets' contents into a pan and bake for 50 minutes.",
+                "startTime": 5,
+                "length": 20
+            },
+            "step2": {
+                "id": 2,
+                "description": "Ask yourself 'Why the heck is it spelled quiche?'.",
+                "startTime": 20,
+                "length": 10
+            },
+            "step3": {
+                "id": 3,
+                "description": "Suddenly realize you're actually making quiche, throw it out and order pizza.",
+                "startTime": 27,
+                "length": 10
             }
         }
     }
